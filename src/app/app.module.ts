@@ -3,10 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CanvasComponent } from './canvas/canvas.component';
+import { PortalComponent } from './portal/portal.component';
+import { ImageComponent } from './image/image.component';
+import { InteractionComponent } from './interaction/interaction.component';
+import { ControlsComponent } from './controls/controls.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CanvasComponent,
+    PortalComponent,
+    ImageComponent,
+    InteractionComponent,
+    ControlsComponent
   ],
   imports: [
     BrowserModule,

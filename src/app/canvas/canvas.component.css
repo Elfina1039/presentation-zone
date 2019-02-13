@@ -1,0 +1,4 @@
+#msCanvas, manuscript{transition:transform .5s; transform-origin:top left}
+
+#msCanvas,#interactiveCanvas{position:absolute; }
+#msWrapper{position:absolute; width:1651px; height:2514px; background-color:"black";}
