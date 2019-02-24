@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,11 +11,14 @@ import { ImgData } from '../interfaces/img-data';
   styleUrls: ['./interaction.component.css']
 })
 export class InteractionComponent implements OnInit {
+    @Output() soundLoaded = new EventEmitter<string>();
     slide: any;
     zones: any;
     description: string;
     imgData: ImgData;
     imgUrl: string;
+    songUrl:string;
+    commentUrl:string;
     name: string;
     cats: string[];
   constructor( private _activatedRoute: ActivatedRoute, private _dataService: DataService) { }
@@ -27,7 +30,7 @@ export class InteractionComponent implements OnInit {
     this.zones=this._dataService.getSlides(map).slides;
       this.imgData=this._dataService.getImgData(map);
       let catList=this.zones.map((zone)=>zone.cat);
-      this.cats=new Set(catList);
+     // this.cats=new Set(catList);
       console.log(this.cats);
       
       
@@ -35,9 +38,20 @@ export class InteractionComponent implements OnInit {
   }
     
 displayClicked(e){
+    console.log("clicked");
+    console.log(e);
     this.name=e.word;
     this.description=e.fields.description.value;
     this.imgUrl="assets/images/"+e.fields.image.value;
+    if(e.fields.music.value){
+       this.songUrl="assets/audio/music/"+e.fields.music.value; 
+    }
+    
+    //if(e.fields.comment.value){
+    //   this.commentUrl="assets/audio/voice/"+e.fields.voice.value; 
+    //}
+    
+    this.soundLoaded.emit(this.songUrl);
 }
 
 }

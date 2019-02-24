@@ -7,20 +7,68 @@ import { DrawingSettings } from '../interfaces/drawing-settings';
 
 export class DrawingSvc {
     drawingSettings={uzemi:{}, highlight:{}};
+    animations=[];
+    animationStage=0;
   
     
 constructor(
     ) { 
     this.drawingSettings.uzemi=<DrawingSettings>{globalAlpha:0.3, fillStyle:"transparent", strokeStyle:"red", lineWidth:5, shadowColor:"transparent", shadowBlur:0};
-    this.drawingSettings.highlight=<DrawingSettings>{globalAlpha:0.1, fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
-    
+     this.drawingSettings.cat1=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(255,0,0,0.5)", strokeStyle:"transparent", lineWidth:1, shadowColor:"transparent", shadowBlur:0};
+         this.drawingSettings.cat2=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,0,0,0.3)", strokeStyle:"transparent", lineWidth:1, shadowColor:"rgba(0,0,0,0.5)", shadowBlur:10};
+         this.drawingSettings.default=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,0,255,0.5)", strokeStyle:"transparent", lineWidth:1, shadowColor:"transparent", shadowBlur:0};
+    this.drawingSettings.highlight=<DrawingSettings>{globalAlpha:0.05, fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
+    this.drawingSettings.image=<DrawingSettings>{globalAlpha:1, fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
     }
     
+    drawSmoothly(ctx, path, cat, interval, repeats, count){
+        this.drawPolygon(ctx,path,cat);
+        if(repeats>count){
+            count++;
+            console.log("setting timeout - " + count);
+            let ref=this;
+            setTimeout(function(){ref.drawSmoothly(ctx, path, cat, interval, repeats, count)},interval);
+        }
+    }
+    
+    runAnimations(ctx, canvas){
+      //console.log("animating");
+         this.applySetting(ctx,"image");
+        let ref=this;
+        var requestAnimationFrame=window.requestAnimationFrame;
+        requestAnimationFrame(function(){ref.animate(ctx, canvas)});
+    }
  
-    drawPolygon(ctx, path, cat){
-        console.log("drawing");
+    
+    animate(ctx, canvas){
+     ctx.clearRect(0,0,canvas.nativeElement.width,canvas.nativeElement.height);
+        let ref=this;
+        this.animations.forEach(function(a){
+            //console.log(a);
+            a.shift=ref.calcDestination(a.imgCoords.topLeft, a.destination, ref.animationStage);
+            ref.drawImage(ctx, a.imgCoords, a.source, a.shift);
+            
+           
+        });
+        if(this.animationStage<1){
+            this.animationStage+=0.007;
+            requestAnimationFrame(function(){ref.runAnimations(ctx, canvas)});
+        }else{
+            console.log("animation finished");
+            console.log(this.animations);
+        }
+        
+    }
+    
+
+    
+
+ 
+    drawPolygon(ctx, points, cat){
+       // console.log("drawing");
+       // console.log(ctx);
         this.applySetting(ctx,this.drawingSettings[cat]);
-            let points=this.stringToPath(path);
+        
             ctx.beginPath();
             ctx.moveTo(points[0].x,points[0].y);
             
@@ -45,56 +93,43 @@ constructor(
         ctx.shadowBlur=stg.shadowBlur;
     }
     
-    drawImage(ctx, path ,source){
+    drawImage(ctx, imgCoords ,source, shift){
+        if(!shift){
+            shift=[0,0];
+        }
+             
         ctx.globalAlpha=1;
-        let points=this.stringToPath(path);
-        let imgCoords=this.calcImgCoords(points);
-        console.log("assets/images/icons/"+source);
+        //let points=this.stringToPath(path);
+        //let imgCoords=this.calcImgCoords(points);
+        //console.log("assets/images/icons/"+source);
         var img = new Image;
 img.onload = function(){
-    
-   ctx.drawImage(img, imgCoords.topLeft.x, imgCoords.topLeft.y, imgCoords.width, imgCoords.height);
+   
+    let ix= parseInt(imgCoords.topLeft.x+shift[0]);
+    let iy=parseInt(imgCoords.topLeft.y+shift[1]);
+    //console.log(ctx.globalAlpha);
+   ctx.drawImage(img,ix, iy, imgCoords.width, imgCoords.height);
    //  document.getElementById("msWrapper").appendChild(img);
 };
 img.src = "assets/images/"+source;
       
-        return points;
+        //return points;
         
     }
     
-    stringToPath(pathString){
-        let coords=pathString.trim().split(/\s+/);
-        let rsl=[];
-        coords.forEach((c)=>{
-            let xy=c.trim().split(",");
-         
-            rsl.push({x:xy[0], y:xy[1]});
-        });
-        return rsl;
+
+    calcDestination(position, destination, stage){
+       // console.log(stage);
+        let diffX=destination[0]-position.x;
+        let diffY=destination[1]-position.y;
+      //  console.log(diffY);
+        let shift=[diffX*stage, diffY*stage];
+      //  console.log(position);
+     //    console.log(destination);
+      //  console.log(shift);
+        return shift;
     }
-    
-    calcImgCoords(points){
-        let xs=points.map((p)=>p.x);
-        let ys=points.map((p)=>p.y);
-        
-        let minX=this.myArrayMin(xs);
-        let minY=this.myArrayMin(ys);
-        
-        let maxX=this.myArrayMax(xs);
-        let maxY=this.myArrayMax(ys);
-        
-      return {topLeft:{x:minX, y:minY}, width:maxX-minX, height:maxY-minY}
-    }
-    
-myArrayMin(arr) {
-  return Math.min.apply(null, arr);
-}
-  
-    myArrayMax(arr) {
-  return Math.max.apply(null, arr);
-}
-  
-    
+
   
         
         

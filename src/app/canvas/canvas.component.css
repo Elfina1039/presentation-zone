@@ -1,4 +1,25 @@
+*{box-sizing:boder-box}
+
 #msCanvas, manuscript{transition:transform .5s; transform-origin:top left}
 
-#msCanvas,#interactiveCanvas{position:absolute; }
-#msWrapper{position:absolute; width:1651px; height:2514px; background-color:"black";}
+#manuscript{border: 3px solid black;
+width: 75%;
+height: 100%;
+position: absolute;
+    background-color:black;
+left:25%}
+
+#msCanvas,#interactiveCanvas, #animationCanvas{position:absolute;transform-origin:top left;transition:transform .5s;  }
+#msWrapper{position:absolute;
+    overflow:scroll;
+background-color: rgb(245,245,245);
+width: 98%;
+height: 98%;
+margin: 1%;}
+
+#zoom{
+     position: fixed;
+    top: 0;
+    left: 27%;
+    z-index: 501;
+}
