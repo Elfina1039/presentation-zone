@@ -23,6 +23,7 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
     title: string;
     bgImage: string;
     zoom:number;
+    fitZoom : number;
     
     ctx: any;
     interCtx: any;
@@ -31,6 +32,7 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor (private _drawingSvc : DrawingSvc) { 
    this.zoom=1;
+    this.fitZoom = 0.4;
 
   }
     
@@ -62,7 +64,8 @@ processZones(){
        this.bgImage="assets/images/"+this.imgData.url;
     this.canvas.nativeElement.style.backgroundImage="url("+this.bgImage+")";
      this.zoom=this.calcZoomToFit();
-     this.scaleCanvas([this.canvas, this.interaction, this.animation],this.zoom);
+    this.fitZoom=this.zoom;
+     this.scaleCanvas([this.canvas, this.interaction, this.animation],this.zoom, this.fitZoom);
      
     this.zones.forEach((zone)=>{
         console.log("canvas drawing zones");
@@ -149,15 +152,23 @@ zoomChng(zChng) {
   // console.log(zChng);
   console.log("before:", this.zoom);
   let newZoomLevel = this.zoom + parseFloat(zChng);
-  this.zoom = newZoomLevel >= .4 ? newZoomLevel : .4;
+  this.zoom = newZoomLevel >= .1 ? newZoomLevel : .1;
   console.log("after:", this.zoom);
-    this.scaleCanvas([this.canvas, this.interaction, this.animation], this.zoom);
+    this.scaleCanvas([this.canvas, this.interaction, this.animation], this.zoom, this.fitZoom);
 
 
 }
-    scaleCanvas(canvases, zoom){
+    scaleCanvas(canvases, zoom, fitZoom){
     canvases.forEach(function(c){
-        c.nativeElement.style.transform= "scale(" + zoom + "," + zoom + ")";
+        let shift=" ";
+        if(zoom<fitZoom){
+          //c.nativeElement.style["transform-origin"]= "center center";  
+            shift=" translate(500px, 500px)";
+        }else{
+            c.nativeElement.style["transform-origin"]= "top left"; 
+        }
+        
+        c.nativeElement.style.transform= "scale(" + zoom + "," + zoom + ")"+shift;
     });
     
 }    

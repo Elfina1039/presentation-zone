@@ -9,13 +9,10 @@
             background-color:transparent'); background-image:url('')" draggable (document:mousemove)="locatePolygon($event, ctx, false)" (click)="locatePolygon($event, ctx, true)"></canvas>    
             
             </div>
-          <div id="zoom" role="group" aria-label="Manuscript zoom">
-            <button type="button" class="btn btn-secondary" id="zoomIn" (click)="zoomChng(0.1)">
-              +
-            </button>
-            <button type="button" class="btn btn-secondary" id="zoomOut" (click)="zoomChng(-0.1)">
-              -
-            </button>
-          </div>
+        
       <img src="/assets/images/textures/forest_tile.png" #les>
+      
+
+      
         </div>
+      <app-canvas-controls [zoom]="zoom" (changeZoom)="zoomChng($event)"></app-canvas-controls>

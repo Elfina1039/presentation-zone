@@ -10,6 +10,7 @@ import { ImageComponent } from './image/image.component';
 import { InteractionComponent } from './interaction/interaction.component';
 //import { ControlsComponent } from './controls/controls.component';
 import { AudioComponent } from './audio/audio.component';
+import { CanvasControlsComponent } from './canvas-controls/canvas-controls.component';
 
 
 
@@ -22,7 +23,8 @@ import { AudioComponent } from './audio/audio.component';
     ImageComponent,
     InteractionComponent,
    // ControlsComponent,
-    AudioComponent
+    AudioComponent,
+   CanvasControlsComponent
   ],
   imports: [
     BrowserModule,
