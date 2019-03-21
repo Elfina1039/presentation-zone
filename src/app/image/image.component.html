@@ -1,5 +1,9 @@
 <div id=container>
-    <img [src]="imgUrl" id=image/>
+    
+    <h1>{{mapTitle}}</h1>
+    
+    
+    <img [src]="imgUrl" id=image *ngIf="imgUrl!=null"/>
     <div id=description>
         <h2 id=imgHeadline>{{name}}</h2>
         <p class=description>

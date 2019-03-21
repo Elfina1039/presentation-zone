@@ -1,0 +1,291 @@
+{
+    "name": "KLuci",
+    "imgData": {
+        "url": "maps/jirikije_a_kubikije.jpg",
+        "width": "960px",
+        "height": "576px",
+        "title": "Jiříkie a Kubíkie"
+    },
+    "slides": [
+        {
+            "word": "Dračí jezero",
+            "color": "#ff0000",
+            "shape": " 718,147  756,147  756,122  718,122 ",
+            "cat": "default",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Dost pekelné jezero. Nesmí k němu létat vzducholodě a zabíjet tam ohnivé draky, protože by se stali nimi."
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/fire_lake.png"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/dragon_breathes.gif"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Jiříkův hrad",
+            "color": "#ff8000",
+            "shape": " 320,401  352,401  352,370  320,370 ",
+            "cat": "cat2",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Nesmí tam Kubík, protože vždycky, když přijde do naší Jiříkie, tak se stane strašná bouře. Boříse hrady, domy a my to pak všechno musíme postavit znovu."
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_paint.png"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/castle_paint.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "infernal",
+            "color": "#ffffff",
+            "shape": " 226,198  241,198  241,218  226,218 ",
+            "cat": "movement",
+            "fields": {
+                "destination": {
+                    "name": "destination",
+                    "value": "250,433"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Infernál je strašný tvr a obývá většinu jeskyní Jiříkie"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/Infernal.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/Infernal.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Plující loď",
+            "color": "#ffffff",
+            "shape": " 30,130  54,130  54,155  30,155 ",
+            "cat": "movement",
+            "fields": {
+                "destination": {
+                    "name": "title",
+                    "value": "590,165"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "loď"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/ship.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/ship.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Velký most",
+            "color": "#ff8000",
+            "shape": " 351,383  434,383  434,346  351,346 ",
+            "cat": "default",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Obrovitý most"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/tower_bridge.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/tower_bridge.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Těžký most",
+            "color": "#ff8000",
+            "shape": " 423,59  479,59  479,10  423,10 ",
+            "cat": "default",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Velmi těžký most"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/bridge_stone.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/bridge_stone.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Hořký hrad",
+            "color": "#ff8000",
+            "shape": " 179,200  205,200  205,172  179,172 ",
+            "cat": "default",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/castle_towers.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_towers.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": "voice/skrinka.m4a"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Vyrábí se v něm hořké kafe a nesmí do něj Kubík, protože by se stal ohavným Taurem. Tak si dávejte moc velký pozor, pane králíku."
+                }
+            }
+        },
+        {
+            "word": "Mořský hrad",
+            "color": "#ff8000",
+            "shape": " 922,42  955,42  955,3  922,3 ",
+            "cat": "default",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/castle_old.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_old.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": "voice/kubikijsky_zakon.m4a"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Jiříkijský král nesmí otevírat zlatou skříňku."
+                }
+            }
+        },
+        {
+            "word": "Mostový hrad",
+            "color": "#ff8000",
+            "shape": " 149,397  179,397  179,366  149,366 ",
+            "cat": "default",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Nesmí tam Kubíkijský král, protože by ho to zaklelo a navždy by se stal zlým černokněžníkem. Nikdo by ho nedokázal zastavit, kromě záblesku Slunce."
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/castle_bridge.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_bridge.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Mléčný hrad",
+            "color": "#ff8000",
+            "shape": " 719,379  743,379  743,357  719,357 ",
+            "cat": "default",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Nesmí do něj Jiřík, protože by se stal ohavným tvorem, kterej chodí na nožičkách, stal by se třeba lvem. A už vy ho nikdo nezastavil, kromě tmy."
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/castle_paint.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_paint.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        }
+    ]
+}

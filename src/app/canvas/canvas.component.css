@@ -15,11 +15,19 @@ left:25%}
 background-color: rgb(245,245,245);
 width: 98%;
 height: 98%;
-margin: 1%;}
+margin: 1em;}
 
 #zoom{
-     position: fixed;
-    top: 0;
-    left: 27%;
+     position: absolute;
+    top: 1em;
+    left: 1em;
     z-index: 501;
+    margin:0.2em;
+}
+
+#zoom button{
+    color:white;
+    background-color:darkslategrey;
+    border-radius:0.5em;
+    font-weight:bold;
 }

@@ -1,0 +1,191 @@
+{
+    "name": "Ernavorn",
+    "imgData": {
+        "url": "maps/ernavorn.jpg",
+        "width": "1600px",
+        "height": "1131px",
+        "title": "Ernavorn"
+    },
+    "slides": [
+        {
+            "word": "Královské loďstvo",
+            "color": "#ffffff",
+            "shape": " 391,685  457,685  457,738  391,738 ",
+            "cat": "movement",
+            "fields": {
+                "destination": {
+                    "name": "destination",
+                    "value": "150,520"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/ship.png"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Flotila krále Saldora"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "animations/fatcat.gif"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Modrá skála",
+            "color": "#00ffff",
+            "shape": " 1256,304  1303,304  1303,261  1256,261 ",
+            "cat": "landscape",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/cave_tropical.png"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Modrá skála leží na severu. Modrá je proto, že je zasněžená. Žijí v ní eskymáci."
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/cave_tropical.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Maraburo",
+            "color": "#0000ff",
+            "shape": " 1130,326  1193,326  1193,370  1130,370 ",
+            "cat": "default",
+            "fields": {
+                "description": {
+                    "name": "description",
+                    "value": "Maledictus haven"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/castle_old.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_old.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Erebo",
+            "color": "#0000ff",
+            "shape": "550,390 630,390 630,320, 550,320",
+            "cat": "default",
+            "fields": {
+                "description": {
+                    "name": "description",
+                    "value": "Vesnice s krystalovou objímkou"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "animations/dragon_flying.gif"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/hut.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": "04-TimeKeepers-AHambar-FWM010b.mp3"
+                }
+            }
+        },
+        {
+            "word": "Tum",
+            "color": "#0000ff",
+            "shape": "undefined",
+            "cat": "default",
+            "fields": {
+                "description": {
+                    "name": "description",
+                    "value": "Aritre haven"
+                },
+                "image": {
+                    "name": "image",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": ""
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Údolí_krve",
+            "color": "#00ff00",
+            "shape": "713,514  738,514  754,511  770,526  790,529  805,532  815,543  831,545  848,551  871,551  882,554  887,564  895,578  881,589  867,586  841,571  833,567  825,557  810,555  799,563  795,551  787,547  779,539  748,530  734,530",
+            "cat": "cat1",
+            "fields": {
+                "description": {
+                    "name": "description",
+                    "value": "Zde proběhla bitva"
+                },
+                "image": {
+                    "name": "image",
+                    "value": "animations/dragon_walking.gif"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": ""
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Červená příšera",
+            "color": "#ff0000",
+            "shape": " 1004,521  1102,521  1102,580  1004,580 ",
+            "cat": "stavba",
+            "fields": {
+                "description": {
+                    "name": "description",
+                    "value": "Tenhle obrázek se líbil klukům."
+                },
+                "image": {
+                    "name": "image",
+                    "value": "icons/threeheaded_monster.png"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/threeheaded_monster.png"
+                },
+                "music": {
+                    "name": "music",
+                    "value": "10-ReignOfVengeance-AHambar-FWM010b.mp3"
+                },
+                "destination": {
+                    "name": "destination",
+                    "value": "700,600"
+                }
+            }
+        }
+    ]
+}

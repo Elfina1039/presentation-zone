@@ -1,21 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 
 @Component({
   selector: 'app-image',
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.css']
 })
-export class ImageComponent implements OnInit {
+export class ImageComponent implements OnChanges {
     
     @Input('imgUrl') imgUrl : string;
     @Input('name') name : string;
     @Input('description') description : string;
-    
+    @Input('mapTitle') mapTitle : string;
 
   constructor() { }
 
-  ngOnInit() {
-      console.log(this.imgUrl);
+  ngOnChanges() {
+     
   }
 
 }

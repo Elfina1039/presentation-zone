@@ -12,6 +12,7 @@ export class AudioComponent implements AfterViewInit {
      @ViewChild("comment") comment;
     
     @Input("songUrl") songUrl: string;
+     @Input("commentUrl") commentUrl: string;
 
   constructor() { }
 

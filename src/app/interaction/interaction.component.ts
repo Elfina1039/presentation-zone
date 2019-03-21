@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { Islide } from '../interfaces/Islide';
+import { Zone, Region, Icon } from '../classes/zone';
 import { ImgData } from '../interfaces/img-data';
 
 @Component({
@@ -15,36 +16,55 @@ export class InteractionComponent implements OnInit {
     slide: any;
     zones: any;
     description: string;
-    imgData: ImgData;
+    imgData: any;
     imgUrl: string;
     songUrl:string;
     commentUrl:string;
     name: string;
     cats: string[];
-  constructor( private _activatedRoute: ActivatedRoute, private _dataService: DataService) { }
+  constructor( private _activatedRoute: ActivatedRoute, private _dataService: DataService) { 
+  this.zones=[];
+
+  }
+
 
   ngOnInit() {
-         console.log("route at component: "+this._activatedRoute.snapshot.params['zid']);
-      let map=this._activatedRoute.snapshot.params['zid'];
-       // let id=<string>this._activatedRoute.snapshot.params['zid'];
-    this.zones=this._dataService.getSlides(map).slides;
-      this.imgData=this._dataService.getImgData(map);
-      let catList=this.zones.map((zone)=>zone.cat);
+         console.log("route at component: "+this._activatedRoute.snapshot.params['map']);
+      console.log("selected zone: "+this._activatedRoute.snapshot.params['zone']);
+      let map=this._activatedRoute.snapshot.params['map'];
+      let zone=this._activatedRoute.snapshot.params['zone'];
+      let ref=this;
+    this._dataService.fetchJson(map).subscribe(function(data){
+        console.log(data);
+       let imgData=data["imgData"];
+        ref.imgData=imgData;
+        console.log(ref.imgData);
+      ref.zones=ref.processIcons(data);
+        console.log(ref.zones);
+   
+      let catList=ref.zones.map((zone)=>zone.category);
      // this.cats=new Set(catList);
-      console.log(this.cats);
+      if(zone){
+          ref.displayClicked(this.zones[zone]);
+      }    
+        
+        
+        
+    });
+       // let id=<string>this._activatedRoute.snapshot.params['zid'];
+  
       
       
-      console.log(this.zones);
   }
     
 displayClicked(e){
     console.log("clicked");
     console.log(e);
     this.name=e.word;
-    this.description=e.fields.description.value;
-    this.imgUrl="assets/images/"+e.fields.image.value;
-    if(e.fields.music.value){
-       this.songUrl="assets/audio/music/"+e.fields.music.value; 
+    this.description=e.description;
+    this.imgUrl=e.image;
+    if(e.music){
+       this.songUrl="assets/audio/music/"+e.music; 
     }
     
     //if(e.fields.comment.value){
@@ -53,5 +73,26 @@ displayClicked(e){
     
     this.soundLoaded.emit(this.songUrl);
 }
+    
+       processIcons(slideSet){
+        let ref=this;
+        var result = [];
+        slideSet.slides.forEach(function(slide){
+            console.log("PROCEsSING "+ slide.word);
+            let newZone;
+            
+            switch(slide.cat){
+                case "Stavby" : newZone= new Icon(slide); break;
+                case "Flora" : newZone= new Region(slide); break;
+                case "Území" : newZone= new Region(slide); break;
+                case "Postavy" : newZone= new Icon(slide); break;
+            }
+            
+            
+            result.push(newZone);
+            console.log(result);
+        });
+        return result;
+    }
 
 }

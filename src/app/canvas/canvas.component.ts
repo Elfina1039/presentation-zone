@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { DrawingSvc } from '../services/drawing.service';
 import { ImgData } from '../interfaces/img-data';
 
@@ -10,11 +10,12 @@ import { ImgData } from '../interfaces/img-data';
   styleUrls: ['./canvas.component.css'],
     providers:[DrawingSvc]
 })
-export class CanvasComponent implements OnInit, AfterViewInit {
+export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
      @ViewChild("msWrapper") wrapper;
     @ViewChild("msCanvas") canvas;
      @ViewChild("interactiveCanvas") interaction;
     @ViewChild("animationCanvas") animation;
+    @ViewChild("les") les;
     @Input("zones") zones: any;
     @Input("imgData") imgData: ImgData;
     @Output() clicked = new EventEmitter<string>();
@@ -30,42 +31,55 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   constructor (private _drawingSvc : DrawingSvc) { 
    this.zoom=1;
+
   }
     
 
 ngOnInit() {
+    console.log("--CANVAS--ON INIT--");
 
   }    
     
-
- ngAfterViewInit() {
-     this.bgImage="assets/images/"+this.imgData.url;
- 
-     
-    this.ctx=this.canvas.nativeElement.getContext("2d");
+    
+    ngAfterViewInit(){
+       console.log("--CANVAS--AFTER VIEW INIT--");
+                       this.ctx=this.canvas.nativeElement.getContext("2d");
      this.interCtx=this.interaction.nativeElement.getContext("2d");
       this.animCtx=this.animation.nativeElement.getContext("2d");
-   this.canvas.nativeElement.style.backgroundImage="url("+this.bgImage+")";
+        this.processZones();
+                     }
+    
+
+ ngOnChanges() {
+    console.log("--CANVAS--ON CHANGES--");
+  if(this.ctx && this.interCtx && this.animCtx){
+      this.processZones();
+  }
+  }
+   
+    
+processZones(){
+       this.bgImage="assets/images/"+this.imgData.url;
+    this.canvas.nativeElement.style.backgroundImage="url("+this.bgImage+")";
      this.zoom=this.calcZoomToFit();
      this.scaleCanvas([this.canvas, this.interaction, this.animation],this.zoom);
+     
     this.zones.forEach((zone)=>{
+        console.log("canvas drawing zones");
+        zone.draw(this.ctx);
         
-        if(zone.fields.icon.value){
-            if(zone.cat=="movement"){
-                this._drawingSvc.animations.push({imgCoords:zone.imgCoords,cat:zone.cat, source:zone.fields.icon.value, destination:zone.fields.destination.value.split(","),shift:[0,0] });
-            }else{
-                this._drawingSvc.drawImage(this.ctx, zone.imgCoords, zone.fields.icon.value, [0,0]);
+            if(zone.category=="movement"){
+                console.log("adding to animtions");
+                console.log(zone);
+                this._drawingSvc.animations.push({img:zone.img,imgCoords:zone.imgCoords,cat:zone.cat, source:zone.fields.icon.value, destination:zone.fields.destination.value.split(","),shift:[<number>0,<number>0] });
             }
-           
-        }else{
-            this._drawingSvc.drawPolygon(this.ctx,zone.points,zone.cat);
-        }
-        
         
     });
+     
     this._drawingSvc.runAnimations(this.animCtx, this.animation);
-  }
     
+    
+}    
    
     
  locatePolygon(mouse, ctx, display) {
@@ -73,7 +87,6 @@ ngOnInit() {
   this.zones.filter((z)=>z.cat!="movement").forEach(function(zone, zid) {
 
     let points = zone.points;
-
     ctx.beginPath();
     ctx.moveTo(parseInt(points[0].x), parseInt(points[0].y));
 
@@ -98,9 +111,9 @@ ngOnInit() {
      if(rZone){
         console.log(rZone.word);
         
-     this.interCtx.clearRect(0,0,2000,2000);
-     this._drawingSvc.drawPolygon(this.interCtx, rZone.points,"highlight");
-      
+     this.interCtx.clearRect(0,0,this.interaction.nativeElement.width,this.interaction.nativeElement.height);
+    // this._drawingSvc.drawPolygon(this.interCtx, rZone.points,"highlight");
+    rZone.highlight(this.interCtx);
      if(display==true){
          console.log(rZone);
         this.clicked.emit(rZone); 

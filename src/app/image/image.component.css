@@ -16,7 +16,7 @@
     padding:3%;
     z-index:500;
     background-image:url("https://www.draconica.net/ft2019/wp-content/uploads/sites/21/2019/02/bg3.jpg");
-    background-size:contain;
+    background-size:cover;
 }
 
 #image{
