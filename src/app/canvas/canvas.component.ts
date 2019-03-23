@@ -68,18 +68,22 @@ processZones(){
      this.scaleCanvas([this.canvas, this.interaction, this.animation],this.zoom, this.fitZoom);
      
     this.zones.forEach((zone)=>{
-        console.log("canvas drawing zones");
-        zone.draw(this.ctx);
+        console.log("canvas drawing zones: ");
+        console.log(zone);
         
-            if(zone.category=="movement"){
-                console.log("adding to animtions");
+        
+            if(zone.category=="Postavy"){
+                console.log("adding to animations");
                 console.log(zone);
-                this._drawingSvc.animations.push({img:zone.img,imgCoords:zone.imgCoords,cat:zone.cat, source:zone.fields.icon.value, destination:zone.fields.destination.value.split(","),shift:[<number>0,<number>0] });
+             //   this._drawingSvc.animations.push({img:zone.img,imgCoords:zone.imgCoords,cat:zone.cat, source:zone.fields.icon.value, destination:zone.fields.destination.value.split(","),shift:[<number>0,<number>0] });
+                this._drawingSvc.animations.push(zone.addToAnimations());
+            }else{
+                zone.draw(this.ctx);
             }
         
     });
      
-    this._drawingSvc.runAnimations(this.animCtx, this.animation);
+   this._drawingSvc.runAnimations(this.animCtx, this.animation);
     
     
 }    

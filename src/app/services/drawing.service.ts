@@ -50,9 +50,9 @@ constructor(
         let ref=this;
         this.animations.forEach(function(a){
             //console.log(a);
-            a.shift=ref.calcDestination(a.imgCoords.topLeft, a.destination, ref.animationStage);
-            ref.drawImage(ctx, a, a.shift);
-            
+            //a.shift=ref.calcDestination(a.imgCoords.topLeft, a.destination, ref.animationStage);
+            //ref.drawImage(ctx, a, a.shift);
+            a.animate(ctx, ref.animationStage, canvas);
            
         });
         if(this.animationStage<1){
@@ -113,10 +113,25 @@ constructor(
         ctx.globalAlpha=1;
         ctx.fillText(zone.word,  zone.imgCoords.topLeft.x ,zone.imgCoords.topLeft.y+zone.imgCoords.height);
         };
-    
-        
-       
  
+    }
+    
+    drawTransparentImage(ctx,zone){
+        //console.log(zone.alpha);
+       // ctx.globalAlpha=zone.alpha;
+        let scale = zone.alpha*25;
+     ctx.save();
+           ctx.scale(scale, scale); 
+        ctx.translate(scale, scale);  
+       
+        // console.log(zone.img+" / "+zzoone.imgCoords.topLeft.x+" / "+ zone.imgCoords.topLeft.y+" / "+ zone.imgCoords.width+" / "+ zone.imgCoords.height);
+        ctx.drawImage(zone.img,0, 0, zone.img.width, zone.img.height);
+         ctx.restore();  
+        ctx.font = "20px Georgia";
+        //ctx.fillStyle="black";
+        ctx.globalAlpha=1;
+        ctx.fillText(zone.word,  zone.imgCoords.topLeft.x ,zone.imgCoords.topLeft.y+zone.imgCoords.height);
+    
     }
     
 

@@ -23,7 +23,7 @@ export class Zone {
     constructor(slide){
         console.log("constructing zone");
         this.word = slide.word;
-        this.category = slide.category;
+        this.category = slide.cat;
         
         this.title = slide.fields.title.value;
         this.image="assets/images/"+slide.fields.image.value;
@@ -132,5 +132,40 @@ export class Region extends Zone {
         
    
 }
+
+
+export class Slide extends Zone {
+    
+    imgCoords : any;
+    position: any;
+    img : any;
+    source : string;
+    alpha : number;
+    
+    constructor(slide){
+        super(slide);
+      this.imgCoords=this.calcImgCoords(this.points); 
+        
+           this.position=this.imgCoords.topLeft;
+            this.img=new Image();
+                this.img.src="assets/images/"+slide.fields.icon.value;
+                console.log("image loaded: " + this.img.src);
+           this.source=slide.fields.icon.value;
+    }
+    
+    addToAnimations(){
+       return this;
+    }
+    
+    animate(ctx, stage, canvas){
+        this.alpha = stage;
+        this.drawing.drawTransparentImage(ctx, this);
+    }
+    
+    draw(ctx){
+        this.drawing.drawStaticImage(ctx, this);
+    }
+}
+
 
 
