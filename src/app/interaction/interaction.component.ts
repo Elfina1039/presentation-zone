@@ -3,7 +3,7 @@ import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { Islide } from '../interfaces/Islide';
-import { Zone, Region, Icon, Slide } from '../classes/zone';
+import { Zone, Region, Icon, Slide, Curtain } from '../classes/zone';
 import { ImgData } from '../interfaces/img-data';
 
 @Component({
@@ -22,9 +22,10 @@ export class InteractionComponent implements OnInit {
     commentUrl:string;
     name: string;
     cats: string[];
-  constructor( private _activatedRoute: ActivatedRoute, private _dataService: DataService) { 
+    mode : string;
+  constructor(protected _activatedRoute: ActivatedRoute, protected _dataService: DataService) { 
   this.zones=[];
-
+this.mode="interaction";
   }
 
 
@@ -85,7 +86,9 @@ displayClicked(e){
                 case "Stavby" : newZone= new Icon(slide); break;
                 case "Flora" : newZone= new Region(slide); break;
                 case "Území" : newZone= new Region(slide); break;
-                case "Postavy" : newZone= new Slide(slide); break;
+                case "Postavy" : newZone= new Icon(slide); break;
+                case "Slide" : newZone= new Slide(slide); break;
+                case "Prechod" : newZone= new Curtain(slide); break;
             }
             
             

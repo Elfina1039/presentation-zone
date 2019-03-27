@@ -138,6 +138,50 @@
                     "value": ""
                 }
             }
+        },
+        {
+            "word": "Saldor",
+            "color": "#0000ff",
+            "shape": " 1620,1030  1765,1030  1765,1187  1620,1187 ",
+            "cat": "Slide",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Král Aritreie"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Domov."
+                },
+                "image": {
+                    "name": "image",
+                    "value": "krajina.jpg"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "krajina.jpg"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "image"
+                },
+                "music": {
+                    "name": "music",
+                    "value": "08-AngelsOfJustice-AHambar-FWM010b.mp3"
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
         }
 ]
 }

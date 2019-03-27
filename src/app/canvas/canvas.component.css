@@ -2,13 +2,6 @@
 
 #msCanvas, manuscript{transition:transform .5s; transform-origin:top left}
 
-#manuscript{border: 1px solid black;
-width: 75%;
-height: 100%;
-position: absolute;
-    background-color:black;
-left:25%;
-top:4%}
 
 #msCanvas,#interactiveCanvas, #animationCanvas{position:absolute;transform-origin:top left;transition:transform .5s;  }
 #msWrapper{position:absolute;

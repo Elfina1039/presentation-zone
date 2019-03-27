@@ -8,6 +8,7 @@ import { DrawingSettings } from '../interfaces/drawing-settings';
 export class DrawingSvc {
     drawingSettings={uzemi:{}, highlight:{},  Flora:{} , region_white:{}, region_green:{},  default:{},  image:{}};
     animations=[];
+    dynamics = [];
     animationStage=0;
   
 constructor(
@@ -15,8 +16,8 @@ constructor(
     
     this.drawingSettings.uzemi=<DrawingSettings>{globalAlpha:0.3, fillStyle:"transparent", strokeStyle:"red", lineWidth:5, shadowColor:"transparent", shadowBlur:0};
     this.drawingSettings.Flora=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,255,0,0.5)", strokeStyle:"transparent", lineWidth:1, shadowColor:"transparent", shadowBlur:0};
-    this.drawingSettings.region_white=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(255,255,255,0.1)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
-        this.drawingSettings.region_green=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,255,0,0.1)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+    this.drawingSettings.region_white=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(255,255,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+        this.drawingSettings.region_green=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,255,0,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
     this.drawingSettings.default=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,0,255,0.5)", strokeStyle:"transparent", lineWidth:1, shadowColor:"transparent", shadowBlur:0};
     this.drawingSettings.highlight=<DrawingSettings>{globalAlpha:0.05, fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
     this.drawingSettings.image=<DrawingSettings>{globalAlpha:1, fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
@@ -36,37 +37,56 @@ constructor(
         }
     }
     
-    runAnimations(ctx, canvas){
-      //console.log("animating");
-         this.applySetting(ctx,"image");
+    runAnimations(ctx, animCtx, canvas, zoom){
+    //  console.log("animating");
+         this.applySetting(animCtx,"image");
         let ref=this;
         var requestAnimationFrame=window.requestAnimationFrame;
-        requestAnimationFrame(function(){ref.animate(ctx, canvas)});
+        requestAnimationFrame(function(){ref.animate(ctx, animCtx, canvas, zoom)});
     }
  
     
-    animate(ctx, canvas){
-     ctx.clearRect(0,0,canvas.nativeElement.width,canvas.nativeElement.height);
+    animate(ctx, animCtx, canvas, zoom){
+     animCtx.clearRect(0,0,canvas.nativeElement.width,canvas.nativeElement.height);
         let ref=this;
         this.animations.forEach(function(a){
-            //console.log(a);
-            //a.shift=ref.calcDestination(a.imgCoords.topLeft, a.destination, ref.animationStage);
-            //ref.drawImage(ctx, a, a.shift);
-            a.animate(ctx, ref.animationStage, canvas);
-           
+            a.animate(animCtx, ref.animationStage, canvas, zoom);
         });
+        
+    
+        
         if(this.animationStage<1){
             this.animationStage+=0.007;
-            requestAnimationFrame(function(){ref.runAnimations(ctx, canvas)});
+            requestAnimationFrame(function(){ref.runAnimations(ctx,animCtx, canvas, zoom)});
         }else{
             console.log("animation finished");
+            animCtx.clearRect(0,0,canvas.nativeElement.width,canvas.nativeElement.height);
+            this.animations.forEach(function(a){
+                if(a.static==true){
+                    a.animate(ctx, 1, canvas, zoom);
+                }
+            
+        });
             console.log(this.animations);
         }
         
     }
   
     
-
+    writeText(ctx, text){
+        this.applySetting(ctx, "image");
+         ctx.shadowColor = "black";
+        ctx.fillStyle="blue";
+        ctx.textAlign="center";
+  
+ 
+      ctx.shadowBlur = 4;
+        ctx.font="120px Georgia";
+       
+        ctx.fillText(text.text, 1700, 2000);
+    
+ 
+    }
     
 
  
@@ -116,21 +136,32 @@ constructor(
  
     }
     
-    drawTransparentImage(ctx,zone){
+    drawTransparentImage(ctx,zone, zoom){
         //console.log(zone.alpha);
-       // ctx.globalAlpha=zone.alpha;
-        let scale = zone.alpha*25;
-     ctx.save();
-           ctx.scale(scale, scale); 
-        ctx.translate(scale, scale);  
+       
+this.applyTransform(ctx, zone.transformSetting);
+   
+       // ctx.scale(zone.maxScale, zone.maxScale);
+         
        
         // console.log(zone.img+" / "+zzoone.imgCoords.topLeft.x+" / "+ zone.imgCoords.topLeft.y+" / "+ zone.imgCoords.width+" / "+ zone.imgCoords.height);
-        ctx.drawImage(zone.img,0, 0, zone.img.width, zone.img.height);
+        ctx.drawImage(zone.img,0, 0, zone.imgCoords.width, zone.imgCoords.height);
+       
+    
+    
+    }
+    
+        
+    drawCurtain(ctx,zone){
+  
+     ctx.save();
+   this.applyTransform(ctx, zone.transformSetting);
+        ctx.fillStyle="black";
+      
+        // console.log(zone.img+" / "+zzoone.imgCoords.topLeft.x+" / "+ zone.imgCoords.topLeft.y+" / "+ zone.imgCoords.width+" / "+ zone.imgCoords.height);
+        ctx.fillRect(0, 0, zone.imgCoords.width, zone.imgCoords.height);
          ctx.restore();  
-        ctx.font = "20px Georgia";
-        //ctx.fillStyle="black";
-        ctx.globalAlpha=1;
-        ctx.fillText(zone.word,  zone.imgCoords.topLeft.x ,zone.imgCoords.topLeft.y+zone.imgCoords.height);
+    
     
     }
     
@@ -157,6 +188,48 @@ constructor(
         ctx.shadowColor=stg.shadowColor;
         ctx.shadowBlur=stg.shadowBlur;
     }
+    
+    applyTransform(ctx,transformSetting){
+       // console.log(">>> TRANSFORMING");
+        //console.log(transformSetting);
+    let scale = transformSetting.scale;
+
+        ctx.globalAlpha = transformSetting.globalAlpha;
+        ctx.translate(transformSetting.translate.x, transformSetting.translate.y); 
+        ctx.scale(scale, scale); 
+        
+    }
+    
+    
+    calcScaleToFit(img,canvas, zoom){
+  // console.log(canvas);
+    let wrapperWidth=canvas.nativeElement.offsetWidth;
+    let wrapperHeight=canvas.nativeElement.offsetHeight;
+    
+    console.log(wrapperWidth*zoom +" <> "+wrapperHeight*zoom);
+    console.log(img.width);
+    let ratioX=parseInt(wrapperWidth)/parseInt(img.width);
+    let ratioY=parseInt(wrapperHeight)/parseInt(img.height);
+    
+  //  console.log(ratioX +" - "+ratioY);
+    
+        let maxScale : number;
+        
+    if(ratioX<=ratioY){
+        maxScale = ratioX;
+    }else{
+        maxScale = ratioY;
+    }
+        
+    let centerX = (wrapperWidth-(img.width*maxScale))/2;   
+    let centerY = (wrapperHeight-(img.height*maxScale))/2;  
+        
+     //   console.log({maxScale: maxScale, center : {x:centerX, y:centerY}});
+        
+        return {maxScale: maxScale, center : {x:centerX, y:centerY}};
+}
+ 
+    
 
   //NOt USED
     

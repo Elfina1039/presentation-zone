@@ -11,6 +11,7 @@ import { InteractionComponent } from './interaction/interaction.component';
 //import { ControlsComponent } from './controls/controls.component';
 import { AudioComponent } from './audio/audio.component';
 import { CanvasControlsComponent } from './canvas-controls/canvas-controls.component';
+import { PresentationComponent } from './presentation/presentation.component';
 
 
 
@@ -24,7 +25,8 @@ import { CanvasControlsComponent } from './canvas-controls/canvas-controls.compo
     InteractionComponent,
    // ControlsComponent,
     AudioComponent,
-   CanvasControlsComponent
+   CanvasControlsComponent,
+   PresentationComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@
             "word": "Dračí jezero",
             "color": "#ff0000",
             "shape": " 718,147  756,147  756,122  718,122 ",
-            "cat": "default",
+            "cat": "Stavby",
             "fields": {
                 "title": {
                     "name": "title",
@@ -39,7 +39,7 @@
             "word": "Jiříkův hrad",
             "color": "#ff8000",
             "shape": " 320,401  352,401  352,370  320,370 ",
-            "cat": "cat2",
+            "cat": "Stavby",
             "fields": {
                 "title": {
                     "name": "title",
@@ -67,8 +67,12 @@
             "word": "infernal",
             "color": "#ffffff",
             "shape": " 226,198  241,198  241,218  226,218 ",
-            "cat": "movement",
+            "cat": "Stavby",
             "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
                 "destination": {
                     "name": "destination",
                     "value": "250,433"
@@ -95,8 +99,12 @@
             "word": "Plující loď",
             "color": "#ffffff",
             "shape": " 30,130  54,130  54,155  30,155 ",
-            "cat": "movement",
+            "cat": "Stavby",
             "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
                 "destination": {
                     "name": "title",
                     "value": "590,165"
@@ -123,7 +131,7 @@
             "word": "Velký most",
             "color": "#ff8000",
             "shape": " 351,383  434,383  434,346  351,346 ",
-            "cat": "default",
+            "cat": "Stavby",
             "fields": {
                 "title": {
                     "name": "title",
@@ -151,7 +159,7 @@
             "word": "Těžký most",
             "color": "#ff8000",
             "shape": " 423,59  479,59  479,10  423,10 ",
-            "cat": "default",
+            "cat": "Stavby",
             "fields": {
                 "title": {
                     "name": "title",
@@ -179,7 +187,7 @@
             "word": "Hořký hrad",
             "color": "#ff8000",
             "shape": " 179,200  205,200  205,172  179,172 ",
-            "cat": "default",
+            "cat": "Stavby",
             "fields": {
                 "title": {
                     "name": "title",
@@ -207,7 +215,7 @@
             "word": "Mořský hrad",
             "color": "#ff8000",
             "shape": " 922,42  955,42  955,3  922,3 ",
-            "cat": "default",
+            "cat": "Stavby",
             "fields": {
                 "title": {
                     "name": "title",
@@ -235,7 +243,7 @@
             "word": "Mostový hrad",
             "color": "#ff8000",
             "shape": " 149,397  179,397  179,366  149,366 ",
-            "cat": "default",
+            "cat": "Stavby",
             "fields": {
                 "title": {
                     "name": "title",
@@ -263,7 +271,7 @@
             "word": "Mléčný hrad",
             "color": "#ff8000",
             "shape": " 719,379  743,379  743,357  719,357 ",
-            "cat": "default",
+            "cat": "Stavby",
             "fields": {
                 "title": {
                     "name": "title",
@@ -283,6 +291,94 @@
                 },
                 "music": {
                     "name": "music",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Truhla nebezpečnosti",
+            "color": "#0000ff",
+            "shape": " 137,180  165,180  165,200  137,200 ",
+            "cat": "Stavby",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Zlatá truhla. Nesmí ji otevírat král Kubík, protože by se stal strašným robotickým tvorem."
+                },
+                "image": {
+                    "name": "image",
+                    "value": "animations/chest.gif"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "animations/chest.gif"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": ""
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Truhla spravedlnosti",
+            "color": "#0000ff",
+            "shape": " 754,141  787,141  787,163  754,163 ",
+            "cat": "Stavby",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": ""
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Smí ji otevírat jenom král Kubíkie, nesmí tam Jiřík, protože by se stal ohavným robotem. Byl by hrozný. Pozor, pane králíku, pozor, pozor."
+                },
+                "image": {
+                    "name": "image",
+                    "value": "animations/chest_glimmer.gif"
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "animations/chest_glimmer.gif"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": ""
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
                     "value": ""
                 }
             }

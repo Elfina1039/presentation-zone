@@ -1,8 +1,9 @@
 
     
     <app-image [imgUrl]="imgUrl" [name]="name" [description]="description" [mapTitle]="imgData.title"></app-image>
- 
+ <div id="manuscript">
     <app-canvas [imgData]="imgData" [zones]="zones" (clicked)="displayClicked($event)"> </app-canvas>  
+</div>
 
 <!--<app-controls [cats]="cats"></app-controls>-->
 
