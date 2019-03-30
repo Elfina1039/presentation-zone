@@ -3,7 +3,7 @@ import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { Islide } from '../interfaces/Islide';
-import { Zone, Region, Icon, Slide, Curtain } from '../classes/zone';
+import { Zone, Region, Icon, Slide, Poster} from '../classes/zone';
 import { ImgData } from '../interfaces/img-data';
 
 @Component({
@@ -87,8 +87,8 @@ displayClicked(e){
                 case "Flora" : newZone= new Region(slide); break;
                 case "Území" : newZone= new Region(slide); break;
                 case "Postavy" : newZone= new Icon(slide); break;
-                case "Slide" : newZone= new Slide(slide); break;
-                case "Prechod" : newZone= new Curtain(slide); break;
+                case "Poster" : newZone= new Poster(slide); break;
+               // case "Prechod" : newZone= new Curtain(slide); break;
             }
             
             

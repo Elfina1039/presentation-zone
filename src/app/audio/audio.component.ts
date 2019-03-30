@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnChanges, ViewChild, Input } from '@angular/core';
+import { Component, AfterViewInit, OnChanges, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-audio',
@@ -12,12 +12,22 @@ export class AudioComponent implements AfterViewInit {
      @ViewChild("comment") comment;
     
     @Input("songUrl") songUrl: string;
+    @Input("playing") playing: boolean;
      @Input("commentUrl") commentUrl: string;
+    
+     @Output() canPlay = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() {}
+
 
   ngAfterViewInit() {
-      if(this.songUrl){
+      let ref=this;
+    this.music.nativeElement.oncanplay = function() {
+    ref.canPlay.emit("ready");
+};
+  
+      
+      if(this.songUrl && this.playing){
           this.song.nativeElement.src=this.songUrl;
           this.song.nativeElement.load();
           this.music.nativeElement.play();
@@ -26,7 +36,7 @@ export class AudioComponent implements AfterViewInit {
     
      ngOnChanges() {
           console.log("PLAY");
-      if(this.songUrl){
+      if(this.songUrl && this.playing){
           this.music.nativeElement.load();
           this.music.nativeElement.play();
       }

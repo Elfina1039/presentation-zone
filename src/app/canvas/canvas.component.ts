@@ -19,6 +19,8 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
     @Input("zones") zones: any;
     @Input("imgData") imgData: ImgData;
     @Input("mode") mode: string;
+    @Input("startTime") startTime: number;
+    @Input("slideDuration") slideDuration: number;
     @Output() clicked = new EventEmitter<string>();
     drawing : DrawingSvc;
     title: string;
@@ -77,8 +79,8 @@ processZones(){
         
         
             if(zone.category=="Slide" || this.mode=="presentation"){
-                console.log("adding to animations");
-                console.log(zone);
+              //  console.log("adding to animations");
+            //    console.log(zone);
              //   this._drawingSvc.animations.push({img:zone.img,imgCoords:zone.imgCoords,cat:zone.cat, source:zone.fields.icon.value, destination:zone.fields.destination.value.split(","),shift:[<number>0,<number>0] });
                 this._drawingSvc.animations=this._drawingSvc.animations.concat(zone.addToAnimations(this.canvas, this.zoom));
             }else{
@@ -87,12 +89,12 @@ processZones(){
         
     });
      
-if(this._drawingSvc.animations.length>0 || this._drawingSvc.dynamics.length>0){
+if(this._drawingSvc.animations.length>0){
     
 console.log("RUNNING ANIMATIONS");
     console.log(this._drawingSvc.animations);
     this._drawingSvc.animationStage=0;
-   this._drawingSvc.runAnimations(this.ctx,this.animCtx, this.animation, this.zoom); 
+   this._drawingSvc.runAnimations(this.ctx,this.animCtx, this.animation, this.zoom, this.startTime, this.slideDuration); 
 }  
     
   
@@ -103,7 +105,8 @@ console.log("RUNNING ANIMATIONS");
    
     
  locatePolygon(mouse, ctx, display) {
-  var rZone;
+     if(this.mode=="interaction"){
+           var rZone;
   this.zones.filter((z)=>z.cat!="movement").forEach(function(zone, zid) {
 
     let points = zone.points;
@@ -141,6 +144,8 @@ console.log("RUNNING ANIMATIONS");
      }
 
   
+     }
+
 
 
 }

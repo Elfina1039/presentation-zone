@@ -6,12 +6,27 @@
         "height": "2580px",
         "title": "Aritreia"
     },
+    "sets":[
+     {
+    "name": "domov",
+    "text": "Domov.",
+    "music": "20-DreamChasers-AHambar-FWM010b.mp3",
+    "duration": 5000
+},
+    {
+    "name": "oběti",
+    "text": "Třicet led ode dne mnohých ran a obětí.",
+    "music": "",
+    "duration": 5000
+}
+        
+    ],
     "slides": [
         {
             "word": "uvod",
             "color": "#0000ff",
             "shape": " 54,80  382,80  382,328  54,328 ",
-            "cat": "Prechod",
+            "cat": "Icon",
             "fields": {
                 "title": {
                     "name": "title",
@@ -52,10 +67,10 @@
             }
         },
         {
-            "word": "Domov",
+            "word": "domov",
             "color": "#ff0000",
             "shape": " 1354,1036  2474,1036  2474,1528  1354,1528 ",
-            "cat": "Slide",
+            "cat": "Image",
             "fields": {
                 "title": {
                     "name": "title",
@@ -79,7 +94,7 @@
                 },
                 "music": {
                     "name": "music",
-                    "value": "20-DreamChasers-AHambar-FWM010b.mp3"
+                    "value": ""
                 },
                 "comment": {
                     "name": "comment",
@@ -185,7 +200,7 @@
             }
         },
         {
-            "word": "kuldra",
+            "word": "oběti",
             "color": "#ff0000",
             "shape": " 2110,336  2934,336  2934,1332  2110,1332 ",
             "cat": "Slide",

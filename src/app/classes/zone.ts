@@ -35,7 +35,7 @@ export class Zone {
         this.music = slide.fields.music.value;
        // this.comment = slide.fields.comment.value;
         
-        this.points=this.stringToPath(slide.shape);
+        this.points=this.drawing.stringToPath(slide.shape);
         
         if(slide.fields.drawingSetting){
             this.drawingSetting = slide.fields.drawingSetting.value;
@@ -59,17 +59,7 @@ export class Zone {
         this.drawing.drawPolygon(ctx, this.points, "highlight");
     }
     
-    
-       stringToPath(pathString){
-        let coords=pathString.trim().split(/\s+/);
-        let rsl=[];
-        coords.forEach((c)=>{
-            let xy=c.trim().split(",");
-         
-            rsl.push({x:xy[0], y:xy[1]});
-        });
-        return rsl;
-    }
+
     
      calcImgCoords(points){
         let xs=points.map((p)=>p.x);
@@ -130,18 +120,20 @@ export class Region extends Zone {
 
     draw(ctx){
       //console.log("drawing Region");
+       //  this.drawing.applySetting(ctx, this.drawingSetting);
         this.drawing.drawPolygon(ctx, this.points, this.drawingSetting);
     }
     
         addToAnimations(canvas, zoom){
      console.log("adding" + this.word);
         let text = new Text(this.description, 200, 500);
-       return [this, text];
+       return [this];
     }
     
     animate(ctx, stage, canvas, zoom){
        // console.log("animating region");
          ctx.save();
+        this.drawing.applySetting(ctx, this.drawingSetting);
         ctx.globalAlpha=stage;
         this.draw(ctx);
          ctx.restore();
@@ -155,7 +147,7 @@ export class Region extends Zone {
 
 
 
-export class Slide extends Zone {
+export class Poster extends Zone {
     
     imgCoords : any;
     position: any;
@@ -165,11 +157,13 @@ export class Slide extends Zone {
     transform: any;
     duration : number;
     transformSetting : TransformSettings;
+    animation : string;
     
     constructor(slide){
         super(slide);
         this.duration = 5000;
         this.static = false;
+        this.animation = slide.fields.animation.value;
       this.imgCoords=this.calcImgCoords(this.points); 
         
            this.position=this.imgCoords.topLeft;
@@ -186,15 +180,20 @@ export class Slide extends Zone {
   
       //console.log("TEXT: " + this.description);
         let text = new Text(this.description, 200, 500);
-       return [this, text];
+       return [this];
     }
     
     animate(ctx, stage, canvas, zoom){
          ctx.save();
-        this.setTransformSetting(stage, "all");
+        this.setTransformSetting(stage, this.animation);
         this.drawing.drawTransparentImage(ctx, this, zoom);
+        
+        if(this.animation=="curtain"){
+            this.drawing.drawCurtain(ctx, this);
+        }
+        
          ctx.restore();
-       // this.drawing.drawCurtain(ctx, this);
+       
           
     }
     
@@ -208,6 +207,7 @@ export class Slide extends Zone {
             case "all": this.transformSetting.globalAlpha = this.calcAlpha(stage); this.transformSetting.scale = this.calcScale(stage, 0.5, 1); this.transformSetting.translate = this.calcTranslate(stage); break;
             case "alpha": this.transformSetting.globalAlpha = this.calcAlpha(stage); this.transformSetting.scale = this.transformSetting.maxScale ; this.transformSetting.translate = {x:0, y:0}; break;
              case "curtain": this.transformSetting.globalAlpha = 1-stage; this.transformSetting.scale = this.transformSetting.maxScale ; this.transformSetting.translate = {x:0, y:0}; break;
+            case "static": this.transformSetting.globalAlpha =  this.calcAlpha(stage); this.transformSetting.scale = 1 ; this.transformSetting.translate = {x:0, y:0}; break;
         }
         
     }
@@ -230,39 +230,45 @@ export class Slide extends Zone {
       }
     
     calcTranslate(stage){
-        
-          let x = this.transformSetting.center.x + ((this.transformSetting.center.x-this.imgCoords.topLeft.x)*stage);
-        let y =  this.transformSetting.center.y + ((this.transformSetting.center.y-this.imgCoords.topLeft.y)*stage);
-        return {x:y, y:y};
+          let x = this.imgCoords.topLeft.x + ((this.transformSetting.center.x-this.imgCoords.topLeft.x)*stage);
+        let y =  this.imgCoords.topLeft.y + ((this.transformSetting.center.y-this.imgCoords.topLeft.y)*stage);
+        return {x:x, y:y};
    
       }
 }
 
-export class Curtain extends Slide{
-  transformSetting : TransformSettings = {maxScale:50, center:{x:0, y:0}, scale:25};
-    constructor(slide){
-        super(slide);
- 
+
+
+export class Slide{
+    name : string;
+    text : Text;
+    duration : number;
+    music : string;
+    zones : any[];
+    
+    constructor(data){
+        this.name = data.name;
+        let text = data.text;
+        this.duration = data.duration;
+        this.zones = data.zones;
+        this.music=data.music;
+        this.zones.push(new Text(text, 1700, 2000));
+        
     }
-        
+    
     addToAnimations(canvas, zoom){
-        
-      //console.log("TEXT: " + this.description);
-        let text = new Text(this.description, 200, 500);
-       return [this, text];
+        let animations=[];
+        this.zones.forEach((z)=>animations=animations.concat(z.addToAnimations(canvas, zoom)));
+       return animations;
     }
     
     animate(ctx, stage, canvas, zoom){
-         ctx.save();
-        this.setTransformSetting(stage, "curtain");
-        this.draw(ctx);
-         ctx.restore();
+         let animations=[];
+        this.zones.forEach((z)=>z.animate(ctx, stage, canvas, zoom));
+       return animations;
      
     }
     
-    draw(ctx){
-        this.drawing.drawCurtain(ctx, this);
-    }
     
     
 }
@@ -275,17 +281,126 @@ export class Text{
     y: number;
     
     constructor(text, x, y){
-      //console.log(">> constructing TEXT: " + text);
+      console.log(">> constructing TEXT: " + text);
         this.text = text;
         this.x= x;
         this.y = y;   
       //console.log(this);
     }
     
-    animate(ctx){
+    addToAnimations(canvas, zoom){
+        return [this]
+    }
+    
+    animate(ctx, stage){
+        ctx.globalAlpha = this.calcAlpha(stage);
         this.drawing.writeText(ctx,this);
     }
+    
+       calcAlpha(stage){
+        let alpha:number;
+             if(stage<0.5){
+         alpha=stage/0.5;
+     }else{
+         alpha=(1-stage)*2;
+     }   
+      return alpha;
+    }
+    
 }
+
+export class Curtain extends Slide{
+   width : number;
+    height : number;
+    x : number;
+    y : number;
+    constructor(data){
+        super(data);
+        this.width = data.width;
+        this.height = data.height;
+        this.x = data.x;
+        this.y = data.y;
+        
+        for(let x=0;x<data.x;x++){
+            for(let y=0;y<data.y;y++){
+            
+                this.zones.push(new Cloud((data.width/data.x)*x, (data.height/data.y)*y, data.shape, data.setting));
+            }
+        }
+        
+         this.zones.push(new Text(this.text, 1700, 2000));
+    }
+    
+    
+}
+
+export class Cloud{
+    type : string;
+    drawing : DrawingSvc  = new DrawingSvc();
+    drawingSetting: string;
+    transformSetting : TransformSettings;
+    points : Point[];
+
+    constructor(x, y, shape, setting){
+        this.type = "element";
+        this.drawingSetting = setting;
+        this.points = this.drawing.stringToPath(shape);
+        this.transformSetting = {maxScale:1, scale:1, translate:{x:x, y:y}, globalAlpha: this.getRandom(0,1)};
+    }
+    
+    addToAnimations(){
+        return [this];
+    }
+
+    
+    animate(ctx, stage, canvas, zoom){
+       // console.log("animating region");
+         ctx.save();
+        this.randomizeSetting(stage);
+        this.drawing.applySetting(ctx, this.drawingSetting);
+        this.drawing.applyTransform(ctx, this.transformSetting);
+         ctx.globalAlpha = 1-stage;
+        this.draw(ctx);
+         ctx.restore();
+     
+    }
+    
+    randomizeSetting(stage){
+        this.transformSetting.translate.x+=this.getRandom(-0.05,0.05);
+        this.transformSetting.translate.y+=this.getRandom(-0.05,0.05);
+        this.transformSetting.globalAlpha=1-stage;
+        this.transformSetting.scale+=this.getRandom(0,0.02);
+        
+     //   console.log(this.transformSetting);
+        
+    }
+    
+     draw(ctx){
+      //console.log("drawing Region");
+         this.drawing.applySetting(ctx, this.drawingSetting);
+        this.drawing.applyTransform(ctx, this.transformSetting);
+        
+        this.drawing.drawPolygon(ctx, this.points, this.drawingSetting);
+    }
+    
+     getRandom(min, max){
+    let result = min + (Math.random()*(max-min));
+    return result;
+}
+    
+      calcAlpha(stage){
+        let alpha:number;
+             if(stage<0.5){
+         alpha=stage/0.5;
+     }else{
+         alpha=(1-stage)*2;
+     }   
+      return alpha;
+    }
+    
+}
+
+
 
 
 

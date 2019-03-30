@@ -6,7 +6,7 @@ import { DrawingSettings } from '../interfaces/drawing-settings';
 })
 
 export class DrawingSvc {
-    drawingSettings={uzemi:{}, highlight:{},  Flora:{} , region_white:{}, region_green:{},  default:{},  image:{}};
+    drawingSettings={uzemi:{}, highlight:{},  Flora:{} , region_white:{}, region_green:{}, region_blue:{},  text:{},  image:{}, cloud:{}, blackness:{}};
     animations=[];
     dynamics = [];
     animationStage=0;
@@ -14,76 +14,92 @@ export class DrawingSvc {
 constructor(
     ) { 
     
-    this.drawingSettings.uzemi=<DrawingSettings>{globalAlpha:0.3, fillStyle:"transparent", strokeStyle:"red", lineWidth:5, shadowColor:"transparent", shadowBlur:0};
-    this.drawingSettings.Flora=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,255,0,0.5)", strokeStyle:"transparent", lineWidth:1, shadowColor:"transparent", shadowBlur:0};
-    this.drawingSettings.region_white=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(255,255,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
-        this.drawingSettings.region_green=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,255,0,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
-    this.drawingSettings.default=<DrawingSettings>{globalAlpha:1, fillStyle:"rgba(0,0,255,0.5)", strokeStyle:"transparent", lineWidth:1, shadowColor:"transparent", shadowBlur:0};
-    this.drawingSettings.highlight=<DrawingSettings>{globalAlpha:0.05, fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
-    this.drawingSettings.image=<DrawingSettings>{globalAlpha:1, fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
+    this.drawingSettings.uzemi=<DrawingSettings>{fillStyle:"transparent", strokeStyle:"red", lineWidth:5, shadowColor:"transparent", shadowBlur:0};
+    this.drawingSettings.Flora=<DrawingSettings>{fillStyle:"rgba(0,255,0,0.5)", strokeStyle:"transparent", lineWidth:1, shadowColor:"transparent", shadowBlur:0};
+    this.drawingSettings.region_white=<DrawingSettings>{fillStyle:"rgba(255,255,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+        this.drawingSettings.region_green=<DrawingSettings>{fillStyle:"rgba(0,255,0,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+         this.drawingSettings.region_blue=<DrawingSettings>{ fillStyle:"rgba(0,0,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+    this.drawingSettings.text=<DrawingSettings>{fillStyle:"yellow", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+    this.drawingSettings.highlight=<DrawingSettings>{ fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
+    this.drawingSettings.image=<DrawingSettings>{ fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
         
+     this.drawingSettings.cloud=<DrawingSettings>{fillStyle:"rgba(255,255,255,0.8)", strokeStyle:"transparent", lineWidth:0, shadowColor:"rgba(255,255,255,0.8)", shadowBlur:5};    
         
+          this.drawingSettings.blackness=<DrawingSettings>{fillStyle:"black", strokeStyle:"transparent", lineWidth:0, shadowColor:"black", shadowBlur:5}; 
    
         
     }
     
-    drawSmoothly(ctx, path, cat, interval, repeats, count){
-        this.drawPolygon(ctx,path,cat);
-        if(repeats>count){
-            count++;
-            console.log("setting timeout - " + count);
-            let ref=this;
-            setTimeout(function(){ref.drawSmoothly(ctx, path, cat, interval, repeats, count)},interval);
-        }
-    }
+
     
-    runAnimations(ctx, animCtx, canvas, zoom){
+    runAnimations(ctx, animCtx, canvas, zoom, startTime, duration){
     //  console.log("animating");
-         this.applySetting(animCtx,"image");
+        // this.applySetting(animCtx,"image");
         let ref=this;
         var requestAnimationFrame=window.requestAnimationFrame;
-        requestAnimationFrame(function(){ref.animate(ctx, animCtx, canvas, zoom)});
+        requestAnimationFrame(function(){ref.animate(ctx, animCtx, canvas, zoom, startTime, duration)});
     }
  
     
-    animate(ctx, animCtx, canvas, zoom){
+    animate(ctx, animCtx, canvas, zoom, startTime, duration){
      animCtx.clearRect(0,0,canvas.nativeElement.width,canvas.nativeElement.height);
         let ref=this;
-        this.animations.forEach(function(a){
-            a.animate(animCtx, ref.animationStage, canvas, zoom);
+        this.animations.forEach(function(a, ai){
+            if(ai<=((ref.animations.length-1)*(ref.animationStage)) ){
+               // let zoneStage = ref.calcStage(startTime + (duration/(ai+1)), duration-());
+               a.animate(animCtx, ref.animationStage, canvas, zoom);
+                
+               }else if(a.text || a.type){
+                  a.animate(animCtx, ref.animationStage, canvas, zoom); 
+               }
+            
+            
         });
         
     
         
         if(this.animationStage<1){
-            this.animationStage+=0.007;
-            requestAnimationFrame(function(){ref.runAnimations(ctx,animCtx, canvas, zoom)});
+            this.animationStage=this.calcStage(startTime, duration);
+            requestAnimationFrame(function(){ref.runAnimations(ctx,animCtx, canvas, zoom, startTime, duration)});
         }else{
             console.log("animation finished");
             animCtx.clearRect(0,0,canvas.nativeElement.width,canvas.nativeElement.height);
-            this.animations.forEach(function(a){
-                if(a.static==true){
-                    a.animate(ctx, 1, canvas, zoom);
-                }
+          //  this.animations.forEach(function(a){
+            //    if(a.static==true){
+            //        a.animate(ctx, 1, canvas, zoom);
+            //    }
             
-        });
+     //   });
             console.log(this.animations);
         }
         
     }
+    
+    
+    calcStage(startTime, duration){
+        let now = Date.now();
+        let diff = now - startTime;
+        let stage = diff/duration;
+        return stage;
+    }
   
     
     writeText(ctx, text){
-        this.applySetting(ctx, "image");
-         ctx.shadowColor = "black";
-        ctx.fillStyle="blue";
-        ctx.textAlign="center";
-  
+        this.applySetting(ctx, "text");
  
-      ctx.shadowBlur = 4;
-        ctx.font="120px Georgia";
+        ctx.textAlign="center";
+        ctx.fillStyle="yellow";
        
+  
+        ctx.font="600 150px Arial";
+       
+    
         ctx.fillText(text.text, 1700, 2000);
+        
+         ctx.lineWidth=5;
+        ctx.strokeStyle="black";
+       
+        ctx.strokeText(text.text, 1700, 2000);
     
  
     }
@@ -91,7 +107,7 @@ constructor(
 
  
     drawPolygon(ctx, points, setting){
-       this.applySetting(ctx,this.drawingSettings[setting]);
+      // this.applySetting(ctx,this.drawingSettings[setting]);
      
             ctx.beginPath();
             ctx.moveTo(points[0].x,points[0].y);
@@ -138,7 +154,7 @@ constructor(
     
     drawTransparentImage(ctx,zone, zoom){
         //console.log(zone.alpha);
-       
+    this.applySetting(ctx, "image");   
 this.applyTransform(ctx, zone.transformSetting);
    
        // ctx.scale(zone.maxScale, zone.maxScale);
@@ -154,13 +170,12 @@ this.applyTransform(ctx, zone.transformSetting);
         
     drawCurtain(ctx,zone){
   
-     ctx.save();
-   this.applyTransform(ctx, zone.transformSetting);
-        ctx.fillStyle="black";
+  
+        ctx.fillStyle="rgba(0,0,0,0.7)";
       
         // console.log(zone.img+" / "+zzoone.imgCoords.topLeft.x+" / "+ zone.imgCoords.topLeft.y+" / "+ zone.imgCoords.width+" / "+ zone.imgCoords.height);
         ctx.fillRect(0, 0, zone.imgCoords.width, zone.imgCoords.height);
-         ctx.restore();  
+ 
     
     
     }
@@ -181,16 +196,16 @@ this.applyTransform(ctx, zone.transformSetting);
     
     
     applySetting(ctx, stg){
-        ctx.globalAlpha=stg.globalAlpha;
-        ctx.fillStyle=stg.fillStyle;
-        ctx.strokeStyle=stg.strokeStyle;
-        ctx.lineWidth=stg.lineWidth;
-        ctx.shadowColor=stg.shadowColor;
-        ctx.shadowBlur=stg.shadowBlur;
+       // ctx.globalAlpha=this.drawingSettings[stg].globalAlpha;
+        ctx.fillStyle=this.drawingSettings[stg].fillStyle;
+        ctx.strokeStyle=this.drawingSettings[stg].strokeStyle;
+        ctx.lineWidth=this.drawingSettings[stg].lineWidth;
+        ctx.shadowColor=this.drawingSettings[stg].shadowColor;
+        ctx.shadowBlur=this.drawingSettings[stg].shadowBlur;
     }
     
     applyTransform(ctx,transformSetting){
-       // console.log(">>> TRANSFORMING");
+      // console.log(">>> TRANSFORMING: " + transformSetting.globalAlpha);
         //console.log(transformSetting);
     let scale = transformSetting.scale;
 
@@ -229,7 +244,17 @@ this.applyTransform(ctx, zone.transformSetting);
         return {maxScale: maxScale, center : {x:centerX, y:centerY}};
 }
  
-    
+        
+       stringToPath(pathString){
+        let coords=pathString.trim().split(/\s+/);
+        let rsl=[];
+        coords.forEach((c)=>{
+            let xy=c.trim().split(",");
+         
+            rsl.push({x:xy[0], y:xy[1]});
+        });
+        return rsl;
+    }
 
   //NOt USED
     
