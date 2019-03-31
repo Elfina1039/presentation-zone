@@ -58,7 +58,7 @@ export class PresentationComponent extends InteractionComponent{
             
         });
         
-        ref.currentSlide=0;
+        ref.currentSlide=12;
          //ref.nextSlide(0);
            if(ref.slides[0].music){
          console.log("PLAYING MUSIC");

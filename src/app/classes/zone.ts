@@ -22,6 +22,9 @@ export class Zone {
     drawingSetting: string;
     static: boolean;
     
+    offset? : number;
+    duration? : number;
+    
     
     constructor(slide){
       //console.log("constructing zone");
@@ -204,10 +207,11 @@ export class Poster extends Zone {
     setTransformSetting(stage, version){
       //console.log("SETTING V: " + version);
         switch(version){
-            case "all": this.transformSetting.globalAlpha = this.calcAlpha(stage); this.transformSetting.scale = this.calcScale(stage, 0.5, 1); this.transformSetting.translate = this.calcTranslate(stage); break;
+            case "all": this.transformSetting.globalAlpha = this.calcAlpha(stage); this.transformSetting.scale = this.calcScale(stage, 0.5, 1); this.transformSetting.translate = this.calcTranslate(stage, this.transformSetting.center); break;
+                case "smAll": this.transformSetting.globalAlpha = this.calcAlpha(stage); this.transformSetting.scale = 1 + (stage/5); this.transformSetting.translate = this.calcTranslate(stage, this.transformSetting.centerOrig); break;
             case "alpha": this.transformSetting.globalAlpha = this.calcAlpha(stage); this.transformSetting.scale = this.transformSetting.maxScale ; this.transformSetting.translate = {x:0, y:0}; break;
              case "curtain": this.transformSetting.globalAlpha = 1-stage; this.transformSetting.scale = this.transformSetting.maxScale ; this.transformSetting.translate = {x:0, y:0}; break;
-            case "static": this.transformSetting.globalAlpha =  this.calcAlpha(stage); this.transformSetting.scale = 1 ; this.transformSetting.translate = {x:0, y:0}; break;
+            case "static": this.transformSetting.globalAlpha =  this.calcAlpha(stage); this.transformSetting.scale = 1 ; this.transformSetting.translate = {x:this.imgCoords.topLeft.x, y:this.imgCoords.topLeft.y}; break;
         }
         
     }
@@ -229,9 +233,9 @@ export class Poster extends Zone {
    
       }
     
-    calcTranslate(stage){
-          let x = this.imgCoords.topLeft.x + ((this.transformSetting.center.x-this.imgCoords.topLeft.x)*stage);
-        let y =  this.imgCoords.topLeft.y + ((this.transformSetting.center.y-this.imgCoords.topLeft.y)*stage);
+    calcTranslate(stage, destination){
+          let x = this.imgCoords.topLeft.x + ((destination.x-this.imgCoords.topLeft.x)*stage);
+        let y =  this.imgCoords.topLeft.y + ((destination.y-this.imgCoords.topLeft.y)*stage);
         return {x:x, y:y};
    
       }
@@ -246,6 +250,9 @@ export class Slide{
     music : string;
     zones : any[];
     
+    seqLength: number;
+    seqCount: number;
+    
     constructor(data){
         this.name = data.name;
         let text = data.text;
@@ -254,6 +261,10 @@ export class Slide{
         this.music=data.music;
         this.zones.push(new Text(text, 1700, 2000));
         
+        this.seqLength = this.zones.filter((z)=> z.text==null).length;
+        this.seqCount = 0;
+        
+       this.setTiming(data);
     }
     
     addToAnimations(canvas, zoom){
@@ -269,6 +280,27 @@ export class Slide{
      
     }
     
+    setTiming(data){
+        let ref = this;
+        let segment = this.duration / this.seqLength;
+        
+          this.zones.filter((z)=>z.text!=null).forEach(function(z, zi){
+            z.offset = 0; 
+            z.duration = data.duration;
+               
+            });
+             
+        
+        
+         this.zones.filter((z)=>z.text==null).forEach(function(z, zi){
+            switch(data.seqMode){
+                case "S" : z.offset = 0; z.duration = data.duration; break; 
+                case "D" : z.offset = zi*segment; z.duration = segment; break; 
+                case "C" : z.offset = zi*segment; z.duration = data.duration-z.offset; break; 
+            }
+              
+        });
+    }
     
     
 }
@@ -328,7 +360,8 @@ export class Curtain extends Slide{
             }
         }
         
-         this.zones.push(new Text(this.text, 1700, 2000));
+         this.zones.push(new Text(data.text, 1700, 2000));
+        this.setTiming(data);
     }
     
     
@@ -345,7 +378,8 @@ export class Cloud{
         this.type = "element";
         this.drawingSetting = setting;
         this.points = this.drawing.stringToPath(shape);
-        this.transformSetting = {maxScale:1, scale:1, translate:{x:x, y:y}, globalAlpha: this.getRandom(0,1)};
+        this.transformSetting = {maxScale:1, scale:1, translate:{x:this.getRandom(x-50, x+50), y:this.getRandom(y-50, y+50)}, globalAlpha: this.getRandom(0,1)};
+        
     }
     
     addToAnimations(){
@@ -370,6 +404,8 @@ export class Cloud{
         this.transformSetting.translate.y+=this.getRandom(-0.05,0.05);
         this.transformSetting.globalAlpha=1-stage;
         this.transformSetting.scale+=this.getRandom(0,0.02);
+        let ref=this;
+       //this.points.forEach((point)=>{point.x+=ref.getRandom(0,1);});
         
      //   console.log(this.transformSetting);
         

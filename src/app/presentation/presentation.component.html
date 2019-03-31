@@ -3,8 +3,8 @@
     <app-canvas [imgData]="imgData" [zones]="zones" [mode]="mode" [startTime]="startTime" [slideDuration]="slideDuration"> </app-canvas>  
 </div>
 
-<!--<app-controls [cats]="cats"></app-controls>-->
 
-<app-audio [songUrl]="songUrl" [playing]="playing" (canPlay)="disPlay($event)"></app-audio>
+
+<app-audio [songUrl]="songUrl" [playing]="playing" (canPlay)="disPlay()"></app-audio>
 
 <button #playButton id="playButton" (click)="playing=true; nextSlide(0)">Přehrát</button>

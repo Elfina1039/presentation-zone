@@ -6,7 +6,8 @@ import { DrawingSettings } from '../interfaces/drawing-settings';
 })
 
 export class DrawingSvc {
-    drawingSettings={uzemi:{}, highlight:{},  Flora:{} , region_white:{}, region_green:{}, region_blue:{},  text:{},  image:{}, cloud:{}, blackness:{}};
+    drawingSettings={uzemi:{}, highlight:{},  Flora:{} , region_white:{}, region_green:{}, region_blue:{}, region_red:{}, region_purple:{}, region_yellow:{},
+                     text:{},  image:{}, cloud:{}, blackness:{}};
     animations=[];
     dynamics = [];
     animationStage=0;
@@ -19,6 +20,9 @@ constructor(
     this.drawingSettings.region_white=<DrawingSettings>{fillStyle:"rgba(255,255,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
         this.drawingSettings.region_green=<DrawingSettings>{fillStyle:"rgba(0,255,0,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
          this.drawingSettings.region_blue=<DrawingSettings>{ fillStyle:"rgba(0,0,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+          this.drawingSettings.region_red=<DrawingSettings>{ fillStyle:"rgba(255,0,0,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+         this.drawingSettings.region_purple=<DrawingSettings>{ fillStyle:"rgba(255,0,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+         this.drawingSettings.region_yellow=<DrawingSettings>{ fillStyle:"rgba(239, 222, 28)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
     this.drawingSettings.text=<DrawingSettings>{fillStyle:"yellow", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
     this.drawingSettings.highlight=<DrawingSettings>{ fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
     this.drawingSettings.image=<DrawingSettings>{ fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
@@ -45,14 +49,14 @@ constructor(
      animCtx.clearRect(0,0,canvas.nativeElement.width,canvas.nativeElement.height);
         let ref=this;
         this.animations.forEach(function(a, ai){
-            if(ai<=((ref.animations.length-1)*(ref.animationStage)) ){
-               // let zoneStage = ref.calcStage(startTime + (duration/(ai+1)), duration-());
-               a.animate(animCtx, ref.animationStage, canvas, zoom);
-                
-               }else if(a.text || a.type){
-                  a.animate(animCtx, ref.animationStage, canvas, zoom); 
+            let now = Date.now();
+            let runningTime = now-startTime;
+           // console.log("running: "+runningTime);
+            if(a.offset<=runningTime && a.offset+a.duration>=runningTime){
+               a.animate(animCtx, ref.calcStage(startTime+a.offset, a.duration), canvas, zoom);
                }
-            
+               
+             
             
         });
         
@@ -91,12 +95,12 @@ constructor(
         ctx.fillStyle="yellow";
        
   
-        ctx.font="600 150px Arial";
+        ctx.font="800 150px Arial";
        
     
         ctx.fillText(text.text, 1700, 2000);
         
-         ctx.lineWidth=5;
+         ctx.lineWidth=6;
         ctx.strokeStyle="black";
        
         ctx.strokeText(text.text, 1700, 2000);
@@ -239,9 +243,12 @@ this.applyTransform(ctx, zone.transformSetting);
     let centerX = (wrapperWidth-(img.width*maxScale))/2;   
     let centerY = (wrapperHeight-(img.height*maxScale))/2;  
         
+    let centerOrigX = (wrapperWidth-(img.width))/2;   
+    let centerOrigY = (wrapperHeight-(img.height))/2;  
+        
      //   console.log({maxScale: maxScale, center : {x:centerX, y:centerY}});
         
-        return {maxScale: maxScale, center : {x:centerX, y:centerY}};
+        return {maxScale: maxScale, center : {x:centerX, y:centerY}, centerOrig:{x:centerOrigX, y:centerOrigY}};
 }
  
         

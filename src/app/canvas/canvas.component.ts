@@ -151,6 +151,8 @@ console.log("RUNNING ANIMATIONS");
 }
     
 calcZoomToFit(){
+    console.log("calculating zoom");
+     console.log(this.wrapper);
     console.log(this.wrapper.nativeElement.offsetHeight);
     let wrapperWidth=this.wrapper.nativeElement.offsetWidth;
     let wrapperHeight=this.wrapper.nativeElement.offsetHeight;
@@ -158,11 +160,12 @@ calcZoomToFit(){
     console.log(wrapperWidth +" <> "+wrapperHeight);
     
     let ratioX=parseInt(wrapperWidth)/parseInt(this.imgData.width);
-    let ratioY=parseInt(wrapperWidth)/parseInt(this.imgData.height);
+    let ratioY=parseInt(wrapperHeight)/parseInt(this.imgData.height);
     
     console.log(ratioX +" - "+ratioY);
     
     if(ratioX<=ratioY){
+        console.log("returning X");
         return ratioX;
     }else{
         return ratioY;
