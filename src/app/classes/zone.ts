@@ -19,6 +19,7 @@ export class Zone {
     source : string;
     
     points: Point[]; 
+    imgCoords : any;
     drawingSetting: string;
     static: boolean;
     
@@ -39,6 +40,8 @@ export class Zone {
        // this.comment = slide.fields.comment.value;
         
         this.points=this.drawing.stringToPath(slide.shape);
+        this.imgCoords=this.calcImgCoords(this.points); 
+        console.log(this.imgCoords);
         
         if(slide.fields.drawingSetting){
             this.drawingSetting = slide.fields.drawingSetting.value;
@@ -59,6 +62,7 @@ export class Zone {
     }
     
    highlight(ctx){
+       this.drawing.applySetting(ctx,"highlight");
         this.drawing.drawPolygon(ctx, this.points, "highlight");
     }
     
@@ -91,25 +95,51 @@ export class Zone {
 
 export class Icon extends Zone {
     
-    imgCoords : any;
     position: any;
     img : any;
     source : string;
+    animationPath : any;
     
     constructor(slide){
         super(slide);
-      this.imgCoords=this.calcImgCoords(this.points); 
+      
         
            this.position=this.imgCoords.topLeft;
             this.img=new Image();
                 this.img.src="assets/images/"+slide.fields.icon.value;
               //console.log("image loaded: " + this.img.src);
            this.source=slide.fields.icon.value;
+        
+        if(slide.fields.path.value){
+            let pathPoints = this.drawing.stringToPath(slide.fields.path.value);
+            this.animationPath = this.drawing.calcAnimationPath(this.imgCoords.topLeft, pathPoints);
+        }
+        
     }
     
     draw(ctx){
         this.drawing.drawStaticImage(ctx, this);
     }
+    
+    
+    addToAnimations(canvas, zoom){
+   //  console.log("adding" + this.word);
+       return [this];
+    }
+    
+    animate(ctx, stage, canvas, zoom){
+       // console.log("animating region");
+         ctx.save();
+        
+        this.draw(ctx);
+         ctx.restore();
+     
+    }
+    
+    
+
+    
+    
 }
 
 
@@ -123,13 +153,12 @@ export class Region extends Zone {
 
     draw(ctx){
       //console.log("drawing Region");
-       //  this.drawing.applySetting(ctx, this.drawingSetting);
+         this.drawing.applySetting(ctx, this.drawingSetting);
         this.drawing.drawPolygon(ctx, this.points, this.drawingSetting);
     }
     
         addToAnimations(canvas, zoom){
      console.log("adding" + this.word);
-        let text = new Text(this.description, 200, 500);
        return [this];
     }
     
@@ -219,9 +248,9 @@ export class Poster extends Zone {
     calcAlpha(stage){
         let alpha:number;
              if(stage<0.5){
-         alpha=stage/0.5;
+         alpha=Math.sqrt(stage/0.5);
      }else{
-         alpha=(1-stage)*2;
+         alpha=Math.sqrt((1-stage)*2);
      }   
       return alpha;
     }
@@ -253,11 +282,11 @@ export class Slide{
     seqLength: number;
     seqCount: number;
     
-    constructor(data){
+    constructor(data, zones){
         this.name = data.name;
         let text = data.text;
         this.duration = data.duration;
-        this.zones = data.zones;
+        this.zones = zones;
         this.music=data.music;
         this.zones.push(new Text(text, 1700, 2000));
         
@@ -324,9 +353,10 @@ export class Text{
         return [this]
     }
     
-    animate(ctx, stage){
+    animate(ctx, stage, canvas){
         ctx.globalAlpha = this.calcAlpha(stage);
-        this.drawing.writeText(ctx,this);
+
+        this.drawing.writeText(ctx,this, canvas.nativeElement.offsetWidth, canvas.nativeElement.offsetHeight);
     }
     
        calcAlpha(stage){
@@ -346,8 +376,8 @@ export class Curtain extends Slide{
     height : number;
     x : number;
     y : number;
-    constructor(data){
-        super(data);
+    constructor(data, zones){
+        super(data, zones);
         this.width = data.width;
         this.height = data.height;
         this.x = data.x;
@@ -427,9 +457,9 @@ export class Cloud{
       calcAlpha(stage){
         let alpha:number;
              if(stage<0.5){
-         alpha=stage/0.5;
+         alpha=Math.sqrt(stage/0.5);
      }else{
-         alpha=(1-stage)*2;
+         alpha=Math.sqrt((1-stage)*2);
      }   
       return alpha;
     }

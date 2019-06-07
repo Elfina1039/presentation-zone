@@ -1,0 +1,247 @@
+ [
+    {
+        "name": "mrak",
+        "type": "curtain",
+        "text": "Domov.",
+        "music": "20-DreamChasers-AHambar-FWM010b.mp3",
+        "duration": 3402,
+        "width": 3500,
+        "height": 2500,
+        "x": 15,
+        "y": 10,
+        "shape": "65,85  177,16  306,65  425,120  574,81  698,49  909,99  1028,255  1048,472  954,519  833,525  764,598  628,596  369,560  264,573  133,490  77,313  126,205  64,152",
+        "setting": "cloud",
+        "seqMode": "S"
+    },
+    {
+        "name": "domov",
+        "text": "Aritreia je zemí, kde jsme vyrůstal.",
+        "music": "",
+        "duration": 4309,
+        "seqMode": "S"
+    },
+    {
+        "name": "mír",
+        "text": "Po třicet let zde vládl mír",
+        "music": "",
+        "duration": 4339,
+        "seqMode": "S"
+    },
+    {
+        "name": "oběti",
+        "text": "Třicet let ode dne mnohých ran a obětí...",
+        "music": "",
+        "duration": 8399,
+        "seqMode": "S"
+    },
+    {
+        "name": "stavba",
+        "text": "jsme stavěli na tom,; co dobyli naši předkové.",
+        "music": "",
+        "duration": 8223,
+        "seqMode": "S"
+    },
+    {
+        "name": "gildy",
+        "text": "Naše zem vzkvétala pod vládou Gild",
+        "music": "",
+        "duration": 5272,
+        "seqMode": "C"
+    },
+    {
+        "name": "vědění",
+        "text": "Naše vědění rostlo každým dnem",
+        "music": "",
+        "duration": 4171,
+        "seqMode": "S"
+    },
+    {
+        "name": "moc",
+        "type": "curtain",
+        "text": "A s věděním vždy roste i moc...",
+        "music": "",
+        "duration": 4417,
+        "width": 3500,
+        "height": 2500,
+        "x": 1,
+        "y": 1,
+        "shape": "0,0 3500,0 3500,2500 0,2500",
+        "setting": "blackness",
+        "seqMode": "S"
+    },
+    {
+        "name": "ernavorn",
+        "text": "Aritreia není jedinou zemí, kterou znám.",
+        "music": "",
+        "duration": 4322,
+        "seqMode": "S"
+    },
+    {
+        "name": "obzor",
+        "text": "A tak se neubráním pohledu přes moře...",
+        "music": "",
+        "duration": 8495,
+        "seqMode": "S"
+    },
+    {
+        "name": "vzpomínky",
+        "text": "...protože tím směrem leží příliš mnoho; vzpomínek a ran...",
+        "music": "",
+        "duration": 8584,
+        "seqMode": "S"
+    },
+    {
+        "name": "objevy",
+        "text": "...a příliš mnoho nepochopeného.",
+        "music": "",
+        "duration": 8864,
+        "seqMode": "S"
+    },
+    {
+        "name": "krystaly",
+        "text": "Náš svět pulzuje magickou mocí krystalů.",
+        "music": "",
+        "duration": 8706,
+        "seqMode": "C"
+    },
+    {
+        "name": "studium",
+        "text": "Léta jsme bádali a studovali",
+        "music": "",
+        "duration": 4727,
+        "seqMode": "S"
+    },
+    {
+        "name": "krystaly2",
+        "text": "...až se nám ji podařilo ovládnout,",
+        "music": "",
+        "duration": 4273,
+        "seqMode": "S"
+    },
+    {
+        "name": "blesk",
+        "type": "curtain",
+        "text": "abychom ovládli i naši budoucnost.",
+        "music": "",
+        "duration": 4273,
+        "width": 3640,
+        "height": 2580,
+        "x": 15,
+        "y": 10,
+        "shape": "65,85  177,16  306,65  425,120  574,81  698,49  909,99  1028,255  1048,472  954,519  833,525  764,598  628,596  369,560  264,573  133,490  77,313  126,205  64,152",
+        "setting": "cloud",
+        "seqMode": "S"
+    },
+    {
+        "name": "čas",
+        "text": "Jednou přijde čas",
+        "music": "",
+        "duration": 4519,
+        "seqMode": "S"
+    },
+    {
+        "name": "návrat",
+        "text": "vrátit se na místa,; kde naši předkové krváceli,",
+        "music": "",
+        "duration": 6452,
+        "seqMode": "S"
+    },
+    {
+        "name": "čas",
+        "text": "na místa,; kde se skutečně psaly dějiny Aritreie",
+        "music": "",
+        "duration": 5650,
+        "seqMode": "S"
+    },
+    {
+        "name": "pouto",
+        "text": "a sám možná zcela nechápu,; jak silné pouto nás k nim váže.",
+        "music": "",
+        "duration": 7396,
+        "seqMode": "S"
+    },
+    {
+        "name": "čas",
+        "text": "Poznám ale,; kdy je třeba začít další kapitolu,",
+        "music": "",
+        "duration": 8656,
+        "seqMode": "S"
+    },
+    {
+        "name": "dál",
+        "text": "odvážit se dál,; než kam kdy dohlédl můj otec",
+        "music": "",
+        "duration": 8720,
+        "seqMode": "S"
+    },
+    {
+        "name": "spojenectví",
+        "text": "obnovit stará spojenectví",
+        "music": "",
+        "duration": 4657,
+        "seqMode": "S"
+    },
+    {
+        "name": "vize",
+        "text": "přestat se ptát,; co by nám mohlo hrozit, kdyby...",
+        "music": "",
+        "duration": 4316,
+        "seqMode": "S"
+    },
+    {
+        "name": "jendat",
+        "text": "a nebát se pohlédnout na to,; co nám leží u nohou.",
+        "music": "",
+        "duration": 8560,
+        "seqMode": "S"
+    },
+    {
+        "name": "připravy",
+        "text": "Čas příprav končí.",
+        "music": "",
+        "duration": 4271,
+        "seqMode": "S"
+    },
+    {
+        "name": "připraveni",
+        "text": "Jsm připraveni",
+        "music": "",
+        "duration": 4394,
+        "seqMode": "S"
+    },
+    {
+        "name": "objevit",
+        "text": "Objevit, co zůstalo skryté ",
+        "music": "",
+        "duration": 4509,
+        "seqMode": "S"
+    },
+    {
+        "name": "dobýt",
+        "text": "Dobýt, co nám dosud bylo odpíráno",
+        "music": "",
+        "duration": 4408,
+        "seqMode": "S"
+    },
+    {
+        "name": "čelit",
+        "text": "Postavit se každému,; kdo by nám zkřížil cestu.",
+        "music": "",
+        "duration": 5315,
+        "seqMode": "S"
+    },
+    {
+        "name": "FT",
+        "text": "17. Fantasy Tábor; od Academie Draconicy",
+        "music": "",
+        "duration": 4017,
+        "seqMode": "S"
+    },
+    {
+        "name": "Závěr",
+        "text": "11. - 24.8. 2019",
+        "music": "",
+        "duration": 3000,
+        "seqMode": "S"
+    }
+]

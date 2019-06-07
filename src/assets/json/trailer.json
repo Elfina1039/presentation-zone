@@ -7,140 +7,260 @@
         "title": "Aritreia"
     },
     "sets": [
-        {
-            "name": "mrak",
-            "type": "curtain",
-            "text": "Domov.",
-            "music": "20-DreamChasers-AHambar-FWM010b.mp3",
-            "duration": 3000,
-            "width": 3500,
-            "height": 2500,
-            "x": 15,
-            "y": 10,
-            "shape": "65,85  177,16  306,65  425,120  574,81  698,49  909,99  1028,255  1048,472  954,519  833,525  764,598  628,596  369,560  264,573  133,490  77,313  126,205  64,152",
-            "setting": "cloud",
-            "seqMode":"S"
-        },
-        {
-            "name": "domov",
-            "text": "Aritreia je zemí, kde jsme vyrůstali.",
-            "music": "",
-            "duration": 3000,
-            "seqMode":"S"
-        },
-        {
-            "name": "mír",
-            "text": "Po třicet let zde vládl mír",
-            "music": "",
-            "duration": 3500,
-            "seqMode":"S"
-        },
-        {
-            "name": "oběti",
-            "text": "Třicet let ode dne mnohých ran a obětí...",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"S"
-        },
-        {
-            "name": "stavba",
-            "text": "jsme stavěli na tom, co dobyli naši předkové.",
-            "music": "",
-            "duration": 5500,
-            "seqMode":"S"
-        },
-        {
-            "name": "gildy",
-            "text": "Naše zem vzkvétala pod vládou gild",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"C"
-        },
-        {
-            "name": "vědění",
-            "text": "Naše vědění rostlo každým dnem",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"S"
-        },
-        {
-            "name": "moc",
-            "type": "curtain",
-            "text": "A s věděním vždy roste i moc...",
-            "music": "",
-            "duration": 4000,
-            "width": 3500,
-            "height": 2500,
-            "x": 1,
-            "y": 1,
-            "shape": "0,0 3500,0 3500,2500 0,2500",
-            "setting": "blackness",
-            "seqMode":"S"
-        },
-        {
-            "name": "ernavorn",
-            "text": "Aritreia není jedinou zemí, kterou známe...",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"S"
-        },
-        {
-            "name": "obzor",
-            "text": "A tak se neubráníme pohledu přes moře...",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"S"
-        },
-        {
-            "name": "vzpomínky",
-            "text": "protože tím směrem leží příliš mnoho vzpomínek a ran...",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"S"
-        },
-        {
-            "name": "objevy",
-            "text": "...a příliš mnoho nepochopeného.",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"S"
-        },
-        {
-            "name": "krystaly",
-            "text": "Náš svět pulzuje magickou mocí krystalů.",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"C"
-        },
-        {
-            "name": "studium",
-            "text": "Léta jsme bádali a studovali...",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"S"
-        },
-        {
-            "name": "krystaly2",
-            "text": "až se nám ji podařilo ovládnout.",
-            "music": "",
-            "duration": 5000,
-            "seqMode":"S"
-        },
-        {
-            "name": "blesk",
-            "type": "curtain",
-            "text": "A tak jsme ovládli i naši budoucnost.",
-            "music": "",
-            "duration": 4000,
-            "width": 3640,
-            "height": 2580,
-            "x": 15,
-            "y": 10,
-            "shape": "65,85  177,16  306,65  425,120  574,81  698,49  909,99  1028,255  1048,472  954,519  833,525  764,598  628,596  369,560  264,573  133,490  77,313  126,205  64,152",
-            "setting": "cloud",
-            "seqMode":"S"
-        }
-    ],
+    {
+        "name": "mrak",
+        "type": "curtain",
+        "text": "Domov.",
+        "music": "20-DreamChasers-AHambar-FWM010b.mp3",
+        "duration": 3402,
+        "width": 3500,
+        "height": 2500,
+        "x": 15,
+        "y": 10,
+        "shape": "65,85  177,16  306,65  425,120  574,81  698,49  909,99  1028,255  1048,472  954,519  833,525  764,598  628,596  369,560  264,573  133,490  77,313  126,205  64,152",
+        "setting": "cloud",
+        "seqMode": "S"
+    },
+    {
+        "name": "domov",
+        "text": "Aritreia je zemí, kde jsme vyrůstal.",
+        "music": "",
+        "duration": 4309,
+        "seqMode": "S"
+    },
+    {
+        "name": "mír",
+        "text": "Po třicet let zde vládl mír",
+        "music": "",
+        "duration": 4339,
+        "seqMode": "S"
+    },
+    {
+        "name": "oběti",
+        "text": "Třicet let ode dne mnohých ran a obětí...",
+        "music": "",
+        "duration": 8399,
+        "seqMode": "S"
+    },
+    {
+        "name": "stavba",
+        "text": "jsme stavěli na tom,; co dobyli naši předkové.",
+        "music": "",
+        "duration": 8223,
+        "seqMode": "S"
+    },
+    {
+        "name": "gildy",
+        "text": "Naše zem vzkvétala pod vládou Gild",
+        "music": "",
+        "duration": 5272,
+        "seqMode": "C"
+    },
+    {
+        "name": "vědění",
+        "text": "Naše vědění rostlo každým dnem",
+        "music": "",
+        "duration": 4171,
+        "seqMode": "S"
+    },
+    {
+        "name": "moc",
+        "type": "curtain",
+        "text": "A s věděním vždy roste i moc...",
+        "music": "",
+        "duration": 4417,
+        "width": 3500,
+        "height": 2500,
+        "x": 1,
+        "y": 1,
+        "shape": "0,0 3500,0 3500,2500 0,2500",
+        "setting": "blackness",
+        "seqMode": "S"
+    },
+    {
+        "name": "ernavorn",
+        "text": "Aritreia není jedinou zemí, kterou znám.",
+        "music": "",
+        "duration": 4322,
+        "seqMode": "S"
+      
+    },
+    {
+        "name": "obzor",
+        "text": "A tak se neubráním pohledu přes moře...",
+        "music": "",
+        "duration": 8495,
+        "seqMode": "S"
+    },
+    {
+        "name": "vzpomínky",
+        "text": "...protože tím směrem leží příliš mnoho; vzpomínek a ran...",
+        "music": "",
+        "duration": 8584,
+        "seqMode": "S"
+    },
+    {
+        "name": "objevy",
+        "text": "...a příliš mnoho nepochopeného.",
+        "music": "",
+        "duration": 8864,
+        "seqMode": "S"
+    },
+    {
+        "name": "krystaly",
+        "text": "Náš svět pulzuje magickou mocí krystalů.",
+        "music": "",
+        "duration": 8706,
+        "seqMode": "C"
+    },
+    {
+        "name": "studium",
+        "text": "Léta jsme bádali a studovali",
+        "music": "",
+        "duration": 4727,
+        "seqMode": "S"
+    },
+    {
+        "name": "krystaly2",
+        "text": "...až se nám ji podařilo ovládnout,",
+        "music": "",
+        "duration": 4273,
+        "seqMode": "S"
+    },
+    {
+        "name": "blesk",
+        "type": "curtain",
+        "text": "abychom ovládli i naši budoucnost.",
+        "music": "",
+        "duration": 4273,
+        "width": 3640,
+        "height": 2580,
+        "x": 1,
+        "y": 1,
+       "shape": "0,0 3500,0 3500,2500 0,2500",
+        "setting": "blackness",
+        "seqMode": "S"
+   
+    },
+    {
+        "name": "čas",
+        "text": "Jednou přijde čas",
+        "music": "",
+        "duration": 4519,
+        "seqMode": "S",
+        "newImage": {
+        "url": "maps/ernavorn.jpg",
+        "width": "1600px",
+        "height": "1131px",
+        "title": "Ernavorn"
+    }
+    },
+    {
+        "name": "návrat",
+        "text": "vrátit se na místa,; kde naši předkové krváceli,",
+        "music": "",
+        "duration": 6452,
+        "seqMode": "S"
+    },
+    {
+        "name": "čas",
+        "text": "na místa,; kde se skutečně psaly dějiny Aritreie",
+        "music": "",
+        "duration": 5650,
+        "seqMode": "S"
+    },
+    {
+        "name": "pouto",
+        "text": "a sám možná zcela nechápu,; jak silné pouto nás k nim váže.",
+        "music": "",
+        "duration": 7396,
+        "seqMode": "S"
+    },
+    {
+        "name": "kapitola",
+        "text": "Poznám ale,; kdy je třeba začít další kapitolu,",
+        "music": "",
+        "duration": 8656,
+        "seqMode": "S"
+    },
+    {
+        "name": "dál",
+        "text": "odvážit se dál,; než kam kdy dohlédl můj otec",
+        "music": "",
+        "duration": 8720,
+        "seqMode": "S"
+    },
+    {
+        "name": "spojenectví",
+        "text": "obnovit stará spojenectví",
+        "music": "",
+        "duration": 4657,
+        "seqMode": "S"
+    },
+    {
+        "name": "vize",
+        "text": "přestat se ptát,; co by nám mohlo hrozit",
+        "music": "",
+        "duration": 4316,
+        "seqMode": "S"
+    },
+    {
+        "name": "jendat",
+        "text": "a nebát se pohlédnout na to,; co nám leží u nohou.",
+        "music": "",
+        "duration": 8560,
+        "seqMode": "S"
+    },
+    {
+        "name": "připravy",
+        "text": "Jedna éra končí.",
+        "music": "",
+        "duration": 4271,
+        "seqMode": "S"
+    },
+    {
+        "name": "připraveni",
+        "text": "Jsem připraven.",
+        "music": "",
+        "duration": 4394,
+        "seqMode": "S"
+    },
+    {
+        "name": "objevit",
+        "text": "Objevit, co zůstalo skryté ",
+        "music": "",
+        "duration": 4509,
+        "seqMode": "S"
+    },
+    {
+        "name": "dobýt",
+        "text": "Dobýt, co nám dosud bylo odpíráno",
+        "music": "",
+        "duration": 4408,
+        "seqMode": "S"
+    },
+    {
+        "name": "čelit",
+        "text": "Postavit se každému,; kdo by nám zkřížil cestu.",
+        "music": "",
+        "duration": 5315,
+        "seqMode": "S"
+    },
+    {
+        "name": "FT",
+        "text": "17. Fantasy Tábor; od Academie Draconicy",
+        "music": "",
+        "duration": 4017,
+        "seqMode": "S"
+    },
+    {
+        "name": "Závěr",
+        "text": "11. - 24.8. 2019",
+        "music": "",
+        "duration": 3000,
+        "seqMode": "S"
+    }
+],
     "slides": [
         {
             "word": "domov",
@@ -543,7 +663,7 @@
         {
             "word": "ernavorn",
             "color": "#0000ff",
-            "shape": "10,10 3614,10 2570,3614 0,2570",
+            "shape": "10,10 3614,10 2400,3614 0,2400",
             "cat": "Poster",
             "fields": {
                 "title": {
@@ -1331,6 +1451,313 @@
         }
     }
 },
-        {"word":"studium","color":"#0000ff","shape":" 946,220  2582,220  2582,2468  946,2468 ", "cat":"Poster", "fields":{"title":{"name":"title","value":"Garris"},"description":{"name":"description","value":""},"image":{"name":"image","value":"Garris.jpg"},"icon":{"name":"icon","value":""},"drawingSetting":{"name":"drawingSetting","value":""},"music":{"name":"music","value":""},"comment":{"name":"comment","value":""},"animation":{"name":"animation","value":""},"path":{"name":"path","value":""}}} 
+          {
+            "word": "návrat",
+            "color": "#00ff00",
+            "shape": "713,514  738,514  754,511  770,526  790,529  805,532  815,543  831,545  848,551  871,551  882,554  887,564  895,578  881,589  867,586  841,571  833,567  825,557  810,555  799,563  795,551  787,547  779,539  748,530  734,530",
+            "cat": "Území",
+            "fields": {
+        "title": {
+            "name": "title",
+            "value": ""
+        },
+        "description": {
+            "name": "description",
+            "value": ""
+        },
+        "image": {
+            "name": "image",
+            "value": "blue.jpg"
+        },
+        "icon": {
+            "name": "icon",
+            "value": ""
+        },
+        "drawingSetting": {
+            "name": "drawingSetting",
+            "value": "region_red"
+        },
+        "music": {
+            "name": "music",
+            "value": ""
+        },
+        "comment": {
+            "name": "comment",
+            "value": ""
+        },
+        "animation": {
+            "name": "animation",
+            "value": "smAll"
+        },
+        "path": {
+            "name": "path",
+            "value": ""
+        }
+    }
+        },
+        {
+            "word": "návrat",
+            "color": "#0000ff",
+            "shape": "550,390 630,390 630,320, 550,320",
+            "cat": "Území",
+            "fields": {
+        "title": {
+            "name": "title",
+            "value": ""
+        },
+        "description": {
+            "name": "description",
+            "value": ""
+        },
+        "image": {
+            "name": "image",
+            "value": "blue.jpg"
+        },
+        "icon": {
+            "name": "icon",
+            "value": ""
+        },
+        "drawingSetting": {
+            "name": "drawingSetting",
+            "value": "region_red"
+        },
+        "music": {
+            "name": "music",
+            "value": ""
+        },
+        "comment": {
+            "name": "comment",
+            "value": ""
+        },
+        "animation": {
+            "name": "animation",
+            "value": "smAll"
+        },
+        "path": {
+            "name": "path",
+            "value": ""
+        }
+    }
+        },
+            {
+        "word": "spojenectví",
+        "color": "#0000ff",
+        "shape": " 184,236  666,236  666,864  184,864 ",
+        "cat": "Poster",
+        "fields": {
+            "title": {
+                "name": "title",
+                "value": ""
+            },
+            "description": {
+                "name": "description",
+                "value": ""
+            },
+            "image": {
+                "name": "image",
+                "value": "Visin.jpg"
+            },
+            "icon": {
+                "name": "icon",
+                "value": "Visin.jpg"
+            },
+            "drawingSetting": {
+                "name": "drawingSetting",
+                "value": ""
+            },
+            "music": {
+                "name": "music",
+                "value": ""
+            },
+            "comment": {
+                "name": "comment",
+                "value": ""
+            },
+            "animation": {
+                "name": "animation",
+                "value": "all"
+            },
+            "path": {
+                "name": "path",
+                "value": ""
+            }
+        }
+    },
+    {
+        "word": "spojenectví",
+        "color": "#0000ff",
+        "shape": " 963,236  1414,233  1404,894  963,891 ",
+        "cat": "Poster",
+        "fields": {
+            "title": {
+                "name": "title",
+                "value": ""
+            },
+            "description": {
+                "name": "description",
+                "value": ""
+            },
+            "image": {
+                "name": "image",
+                "value": "Torin.jpg"
+            },
+            "icon": {
+                "name": "icon",
+                "value": "Torin.jpg"
+            },
+            "drawingSetting": {
+                "name": "drawingSetting",
+                "value": ""
+            },
+            "music": {
+                "name": "music",
+                "value": ""
+            },
+            "comment": {
+                "name": "comment",
+                "value": ""
+            },
+            "animation": {
+                "name": "animation",
+                "value": "all"
+            },
+            "path": {
+                "name": "path",
+                "value": ""
+            }
+        }
+    },
+    {
+        "word": "dál2",
+        "color": "#0000ff",
+        "shape": " 447,88  1146,88  1146,973  447,973 ",
+        "cat": "Poster",
+        "fields": {
+            "title": {
+                "name": "title",
+                "value": ""
+            },
+            "description": {
+                "name": "description",
+                "value": ""
+            },
+            "image": {
+                "name": "image",
+                "value": "Saldor.jpg"
+            },
+            "icon": {
+                "name": "icon",
+                "value": "Saldor.jpg"
+            },
+            "drawingSetting": {
+                "name": "drawingSetting",
+                "value": ""
+            },
+            "music": {
+                "name": "music",
+                "value": ""
+            },
+            "comment": {
+                "name": "comment",
+                "value": ""
+            },
+            "animation": {
+                "name": "animation",
+                "value": "all"
+            },
+            "path": {
+                "name": "path",
+                "value": ""
+            }
+        }
+    },
+    {
+        "word": "návrat",
+        "color": "Poster",
+        "shape": " 127,106  552,106  552,670  127,670 ",
+        "cat": "Poster",
+        "fields": {
+            "title": {
+                "name": "title",
+                "value": ""
+            },
+            "description": {
+                "name": "description",
+                "value": ""
+            },
+            "image": {
+                "name": "image",
+                "value": "ruiny.jpg"
+            },
+            "icon": {
+                "name": "icon",
+                "value": "ruiny.jpg"
+            },
+            "drawingSetting": {
+                "name": "drawingSetting",
+                "value": ""
+            },
+            "music": {
+                "name": "music",
+                "value": ""
+            },
+            "comment": {
+                "name": "comment",
+                "value": ""
+            },
+            "animation": {
+                "name": "animation",
+                "value": "all"
+            },
+            "path": {
+                "name": "path",
+                "value": ""
+            }
+        }
+    },
+    {
+        "word": "kapitola",
+        "color": "#0000ff",
+        "shape": " 409,53  1172,53  1172,1087  409,1087 ",
+        "cat": "Poster",
+        "fields": {
+            "title": {
+                "name": "title",
+                "value": ""
+            },
+            "description": {
+                "name": "description",
+                "value": ""
+            },
+            "image": {
+                "name": "image",
+                "value": "Lucas.jpg"
+            },
+            "icon": {
+                "name": "icon",
+                "value": "Lucas.jpg"
+            },
+            "drawingSetting": {
+                "name": "drawingSetting",
+                "value": ""
+            },
+            "music": {
+                "name": "music",
+                "value": ""
+            },
+            "comment": {
+                "name": "comment",
+                "value": ""
+            },
+            "animation": {
+                "name": "animation",
+                "value": "all"
+            },
+            "path": {
+                "name": "path",
+                "value": ""
+            }
+        }
+    }
     ]
 }

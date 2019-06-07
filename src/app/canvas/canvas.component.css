@@ -1,6 +1,6 @@
 *{box-sizing:boder-box}
 
-#msCanvas, manuscript{transition:transform .5s; transform-origin:top left}
+#msCanvas, manuscript{transition:transform .5s; transition: background-image .5x; transform-origin:top left}
 
 
 #msCanvas,#interactiveCanvas, #animationCanvas{position:absolute;transform-origin:top left;transition:transform .5s; 
@@ -24,3 +24,11 @@ app-canvas-controls{
     left:0%;
     color:white;
 }
+
+#manuscript{border: 1px solid black;
+width: 75%;
+height: 100%;
+position: absolute;
+    background-color:black;
+left:25%;
+top:4%}

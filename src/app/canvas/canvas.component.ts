@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { DrawingSvc } from '../services/drawing.service';
 import { ImgData } from '../interfaces/img-data';
+import { ZoneCategory } from '../interfaces/zone-category';
 
 
 
@@ -12,11 +13,13 @@ import { ImgData } from '../interfaces/img-data';
 })
 export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
      @ViewChild("msWrapper") wrapper;
+     @ViewChild("manuscript") outer;
     @ViewChild("msCanvas") canvas;
      @ViewChild("interactiveCanvas") interaction;
     @ViewChild("animationCanvas") animation;
     @ViewChild("les") les;
     @Input("zones") zones: any;
+     @Input("zoneCategories") zoneCategories : any;
     @Input("imgData") imgData: ImgData;
     @Input("mode") mode: string;
     @Input("startTime") startTime: number;
@@ -42,13 +45,13 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
     
 
 ngOnInit() {
-    console.log("--CANVAS--ON INIT--");
+   // console.log("--CANVAS--ON INIT--");
 
   }    
     
     
     ngAfterViewInit(){
-       console.log("--CANVAS--AFTER VIEW INIT--");
+     //  console.log("--CANVAS--AFTER VIEW INIT--");
                        this.ctx=this.canvas.nativeElement.getContext("2d");
      this.interCtx=this.interaction.nativeElement.getContext("2d");
       this.animCtx=this.animation.nativeElement.getContext("2d");
@@ -57,7 +60,15 @@ ngOnInit() {
     
 
  ngOnChanges() {
-    console.log("--CANVAS--ON CHANGES--");
+   console.log("--CANVAS--ON CHANGES--");
+     this.bgImage="assets/images/"+this.imgData.url;
+    this.canvas.nativeElement.style.backgroundImage="url("+this.bgImage+")";
+     this.zoom=this.calcZoomToFit();
+    this.fitZoom=this.zoom;
+     this.scaleCanvas([this.canvas, this.interaction, this.animation],this.wrapper, this.outer,this.zoom, this.fitZoom);
+     
+  
+     
   if(this.ctx && this.interCtx && this.animCtx){
       this.processZones();
   }
@@ -65,11 +76,7 @@ ngOnInit() {
    
     
 processZones(){
-       this.bgImage="assets/images/"+this.imgData.url;
-    this.canvas.nativeElement.style.backgroundImage="url("+this.bgImage+")";
-     this.zoom=this.calcZoomToFit();
-    this.fitZoom=this.zoom;
-     this.scaleCanvas([this.canvas, this.interaction, this.animation],this.zoom, this.fitZoom);
+    
     
     this._drawingSvc.animations=[];
      
@@ -91,8 +98,8 @@ processZones(){
      
 if(this._drawingSvc.animations.length>0){
     
-console.log("RUNNING ANIMATIONS");
-    console.log(this._drawingSvc.animations);
+//console.log("RUNNING ANIMATIONS");
+ //   console.log(this._drawingSvc.animations);
     this._drawingSvc.animationStage=0;
    this._drawingSvc.runAnimations(this.ctx,this.animCtx, this.animation, this.zoom, this.startTime, this.slideDuration); 
 }  
@@ -132,14 +139,15 @@ console.log("RUNNING ANIMATIONS");
 
   });
      if(rZone){
-        console.log(rZone.word);
+      //  console.log(rZone.word);
         
      this.interCtx.clearRect(0,0,this.interaction.nativeElement.width,this.interaction.nativeElement.height);
     // this._drawingSvc.drawPolygon(this.interCtx, rZone.points,"highlight");
     rZone.highlight(this.interCtx);
      if(display==true){
-         console.log(rZone);
+      //   console.log(rZone);
         this.clicked.emit(rZone); 
+         this.focusOn(rZone);
      } 
      }
 
@@ -151,21 +159,21 @@ console.log("RUNNING ANIMATIONS");
 }
     
 calcZoomToFit(){
-    console.log("calculating zoom");
-     console.log(this.wrapper);
-    console.log(this.wrapper.nativeElement.offsetHeight);
+//    console.log("calculating zoom");
+  //   console.log(this.wrapper);
+   // console.log(this.wrapper.nativeElement.offsetHeight);
     let wrapperWidth=this.wrapper.nativeElement.offsetWidth;
     let wrapperHeight=this.wrapper.nativeElement.offsetHeight;
     
-    console.log(wrapperWidth +" <> "+wrapperHeight);
+ //   console.log(wrapperWidth +" <> "+wrapperHeight);
     
     let ratioX=parseInt(wrapperWidth)/parseInt(this.imgData.width);
     let ratioY=parseInt(wrapperHeight)/parseInt(this.imgData.height);
     
-    console.log(ratioX +" - "+ratioY);
+   // console.log(ratioX +" - "+ratioY);
     
     if(ratioX<=ratioY){
-        console.log("returning X");
+      //  console.log("returning X");
         return ratioX;
     }else{
         return ratioY;
@@ -175,15 +183,24 @@ calcZoomToFit(){
     
 zoomChng(zChng) {
   // console.log(zChng);
-  console.log("before:", this.zoom);
+ // console.log("before:", this.zoom);
   let newZoomLevel = this.zoom + parseFloat(zChng);
   this.zoom = newZoomLevel >= .1 ? newZoomLevel : .1;
-  console.log("after:", this.zoom);
-    this.scaleCanvas([this.canvas, this.interaction, this.animation], this.zoom, this.fitZoom);
+//  console.log("after:", this.zoom);
+    this.scaleCanvas([this.canvas, this.interaction, this.animation], this.wrapper, this.outer, this.zoom, this.fitZoom);
 
 
 }
-    scaleCanvas(canvases, zoom, fitZoom){
+    scaleCanvas(canvases, inner, outer, zoom, fitZoom){
+        
+let dw=parseInt(outer.nativeElement.style.width);   // manuscript element
+let dh=parseInt(outer.nativeElement.style.height);   
+    
+    
+let nw : number=parseInt(this.imgData.width)*zoom;    
+let nh : number=parseInt(this.imgData.height)*zoom;  
+    
+        
     canvases.forEach(function(c){
         let shift=" ";
         if(zoom<fitZoom){
@@ -194,9 +211,72 @@ zoomChng(zChng) {
         }
         
         c.nativeElement.style.transform= "scale(" + zoom + "," + zoom + ")"+shift;
+        
+         if(nw<dw && nh<dh)
+        {
+       c.nativeElement.style.overflow="hidden";
+        }
+    else
+           {
+            c.nativeElement.style.overflow="scroll";
+        }
+        
     });
     
-}    
+
+   
+    
+   // console.log(nw + "--" + nh);
+    inner.nativeElement.style.width=nw;
+  inner.nativeElement.style.height=nh;
+       
+        
+} 
+    
+  focusOn(zone){
+    console.log("zooming in");
+
+    let xtr=zone.imgCoords;
+    
+    let sx=xtr.max.x-xtr.min.x;
+    let sy=xtr.max.y-xtr.min.y;
+    
+    let vw=this.outer.nativeElement.clientWidth;
+    let vh=this.outer.nativeElement.clientHeight;
+      
+      console.log(this.outer);
+    
+    let ox=(vw-sx)/2;
+    let oy=(vh-sy)/2;
+    
+    let nzm : number = parseFloat(vw/sx);
+      console.log(vw + " : " + sx);
+      console.log("new zoom: "+nzm);
+    
+    this.zoomChng(nzm-this.zoom);
+      let ref=this;
+    setTimeout(function(){ref.moveScreen({x:xtr.min.x,y:xtr.min.y},ox,oy, nzm)},500);
+                      
+                };
+    
+moveScreen(xy, ox, oy, nzm) {
+  console.log(xy.x + "//" + xy.y);
+
+
+    var x=Math.max(0,(xy.x*nzm));
+    var y=Math.max(0,(xy.y*nzm));
+
+
+  console.log(x + "-ss-" + y);
+    console.log( this.outer);
+
+  this.wrapper.nativeElement.scrollTop = y;
+  this.wrapper.nativeElement.scrollLeft = x;
 
 
 }
+    
+
+}
+
+

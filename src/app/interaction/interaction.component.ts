@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Islide } from '../interfaces/Islide';
 import { Zone, Region, Icon, Slide, Poster} from '../classes/zone';
-import { ImgData } from '../interfaces/img-data';
+import { ImgData} from '../interfaces/img-data';
+import { ZoneCategory } from '../interfaces/zone-category';
 
 @Component({
   selector: 'app-interaction',
@@ -21,16 +22,18 @@ export class InteractionComponent implements OnInit {
     songUrl:string;
     commentUrl:string;
     name: string;
-    cats: string[];
+    zoneCategories: ZoneCategory[];
     mode : string;
+    
   constructor(protected _activatedRoute: ActivatedRoute, protected _dataService: DataService) { 
   this.zones=[];
+      this.zoneCategories=[];
 this.mode="interaction";
   }
 
 
   ngOnInit() {
-         console.log("route at component: "+this._activatedRoute.snapshot.params['map']);
+    console.log("route at component: "+this._activatedRoute.snapshot.params['map']);
       console.log("selected zone: "+this._activatedRoute.snapshot.params['zone']);
       let map=this._activatedRoute.snapshot.params['map'];
       let zone=this._activatedRoute.snapshot.params['zone'];
@@ -78,10 +81,11 @@ displayClicked(e){
        processIcons(slideSet){
         let ref=this;
         var result = [];
+         let categories = {};
+           
         slideSet.slides.forEach(function(slide){
-            console.log("PROCEsSING "+ slide.word);
+            console.log("PROCESSING "+ slide.word);
             let newZone;
-            
             switch(slide.cat){
                 case "Stavby" : newZone= new Icon(slide); break;
                 case "Flora" : newZone= new Region(slide); break;
@@ -91,10 +95,19 @@ displayClicked(e){
                // case "Prechod" : newZone= new Curtain(slide); break;
             }
             
+            if(!categories[slide.cat]){
+               categories[slide.cat] = {name: slide.cat, zoneCount:0, selected:true}; 
+            }
+            categories[slide.cat].zoneCount++;
             
             result.push(newZone);
             console.log(result);
         });
+           
+           for(let c in categories){
+               this.zoneCategories.push(categories[c]);
+           }
+           
         return result;
     }
 

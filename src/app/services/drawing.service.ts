@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DrawingSettings } from '../interfaces/drawing-settings';
+import { ImgData} from '../interfaces/img-data';
+import { Point } from '../interfaces/point';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,8 @@ export class DrawingSvc {
     animations=[];
     dynamics = [];
     animationStage=0;
+    
+    imgData : any;
   
 constructor(
     ) { 
@@ -22,16 +26,15 @@ constructor(
          this.drawingSettings.region_blue=<DrawingSettings>{ fillStyle:"rgba(0,0,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
           this.drawingSettings.region_red=<DrawingSettings>{ fillStyle:"rgba(255,0,0,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
          this.drawingSettings.region_purple=<DrawingSettings>{ fillStyle:"rgba(255,0,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
-         this.drawingSettings.region_yellow=<DrawingSettings>{ fillStyle:"rgba(239, 222, 28)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+         this.drawingSettings.region_yellow=<DrawingSettings>{ fillStyle:"rgba(239, 222, 28, 0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
     this.drawingSettings.text=<DrawingSettings>{fillStyle:"yellow", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
-    this.drawingSettings.highlight=<DrawingSettings>{ fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
+    this.drawingSettings.highlight=<DrawingSettings>{ fillStyle:"rgba(255,255,255,0.2)", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
     this.drawingSettings.image=<DrawingSettings>{ fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
         
      this.drawingSettings.cloud=<DrawingSettings>{fillStyle:"rgba(255,255,255,0.8)", strokeStyle:"transparent", lineWidth:0, shadowColor:"rgba(255,255,255,0.8)", shadowBlur:5};    
         
           this.drawingSettings.blackness=<DrawingSettings>{fillStyle:"black", strokeStyle:"transparent", lineWidth:0, shadowColor:"black", shadowBlur:5}; 
-   
-        
+  this.imgData = {};
     }
     
 
@@ -66,7 +69,7 @@ constructor(
             this.animationStage=this.calcStage(startTime, duration);
             requestAnimationFrame(function(){ref.runAnimations(ctx,animCtx, canvas, zoom, startTime, duration)});
         }else{
-            console.log("animation finished");
+          //  console.log("animation finished");
             animCtx.clearRect(0,0,canvas.nativeElement.width,canvas.nativeElement.height);
           //  this.animations.forEach(function(a){
             //    if(a.static==true){
@@ -74,7 +77,7 @@ constructor(
             //    }
             
      //   });
-            console.log(this.animations);
+        //    console.log(this.animations);
         }
         
     }
@@ -88,24 +91,44 @@ constructor(
     }
   
     
-    writeText(ctx, text){
+    writeText(ctx, text, canvasWidth, canvasHeight){
         this.applySetting(ctx, "text");
  
         ctx.textAlign="center";
         ctx.fillStyle="yellow";
        
+        let fontSize = canvasHeight/20;
   
-        ctx.font="800 150px Arial";
+        ctx.font="800 "+fontSize+"px Arial";
        
-    
-        ctx.fillText(text.text, 1700, 2000);
+    let textWidth = ctx.measureText(text.text).width;
         
-         ctx.lineWidth=6;
-        ctx.strokeStyle="black";
+        let  x = canvasWidth/2;
+        let y: number;
+        
+        if(textWidth<=canvasWidth-50){
+            y = canvasHeight - 20 - fontSize;
+            this.placeText(ctx,text.text.replace(";",""), x, y);
+        }else{
+            let textSplit = text.text.split(";");
+
+             y = canvasHeight - 40 - (fontSize*2);
+            this.placeText(ctx,textSplit[0], x, y);
+              y = canvasHeight - 20 - fontSize;
+            this.placeText(ctx,textSplit[1], x, y);
+        }
+        
+        
        
-        ctx.strokeText(text.text, 1700, 2000);
     
  
+    }
+    
+    placeText(ctx,text, x, y){
+         ctx.fillText(text, x, y);
+        ctx.lineWidth=6;
+        ctx.strokeStyle="black";
+        ctx.strokeText(text, x, y);
     }
     
 
@@ -146,7 +169,7 @@ constructor(
        // let img=new Image();
         zone.img.onload=function(img){
              
-         console.log(zone.img+" / "+zone.imgCoords.topLeft.x+" / "+ zone.imgCoords.topLeft.y+" / "+ zone.imgCoords.width+" / "+ zone.imgCoords.height);
+     //    console.log(zone.img+" / "+zone.imgCoords.topLeft.x+" / "+ zone.imgCoords.topLeft.y+" / "+ zone.imgCoords.width+" / "+ zone.imgCoords.height);
         ctx.drawImage(zone.img,zone.imgCoords.topLeft.x, zone.imgCoords.topLeft.y, zone.imgCoords.width, zone.imgCoords.height);
         ctx.font = "20px Georgia";
         //ctx.fillStyle="black";
@@ -184,7 +207,7 @@ this.applyTransform(ctx, zone.transformSetting);
     
     }
     
-
+//old version
     calcDestination(position, destination, stage){
        // console.log(stage);
         let diffX=destination[0]-position.x;
@@ -197,6 +220,39 @@ this.applyTransform(ctx, zone.transformSetting);
         return shift;
     }
     
+     calcAnimationPath(position : Point, points : Point[]){
+        let result = [{start:{time:0, point:position}, end:{time:0, point:{x:position.x, y:position.y}}, distance:0, relDistance:0}];
+        let ref = this;
+         points.forEach(function(p, pi){
+             result[pi].end.point=p;
+             result[pi].distance = ref.calcPathLength(result[pi].start.point, result[pi].end.point);
+             result.push({start:{time:0, point: p}, end:{time:0, point:{x:position.x, y:position.y}}, distance : 0, relDistance: 0});
+         });
+         
+         let distances = result.map((r)=>r.distance);
+         console.log("total distance array: " + distances);
+         let totalDistance = distances.reduce((tot,d)=>tot+d);
+           console.log("total distance: " + totalDistance);
+         let counter = 0;
+          result.forEach(function(r, ri){
+             r.relDistance = r.distance/totalDistance;
+             r.start.time = counter;
+              counter+=r.relDistance;
+            r.end.time = counter;
+         });
+         
+         return result;
+         
+    }
+
+ calcPathLength(a, b){
+        let sx = Math.abs(a.x-b.x);
+        let sy = Math.abs(a.y-b.y);
+        
+        let p = Math.sqrt(Math.pow(sx,2) + Math.pow(sy,2));
+        
+        return p;
+    }
     
     
     applySetting(ctx, stg){
@@ -225,8 +281,8 @@ this.applyTransform(ctx, zone.transformSetting);
     let wrapperWidth=canvas.nativeElement.offsetWidth;
     let wrapperHeight=canvas.nativeElement.offsetHeight;
     
-    console.log(wrapperWidth*zoom +" <> "+wrapperHeight*zoom);
-    console.log(img.width);
+   // console.log(wrapperWidth*zoom +" <> "+wrapperHeight*zoom);
+   // console.log(img.width);
     let ratioX=parseInt(wrapperWidth)/parseInt(img.width);
     let ratioY=parseInt(wrapperHeight)/parseInt(img.height);
     
@@ -266,7 +322,7 @@ this.applyTransform(ctx, zone.transformSetting);
   //NOt USED
     
          drawTexture(ctx, zone, cat){
-             console.log("drawing texture");
+           //  console.log("drawing texture");
       
            // console.log("texture loaded");
            // zone.img.src="assets/images/textures/forest_tile.png";
@@ -278,7 +334,7 @@ this.applyTransform(ctx, zone.transformSetting);
             
             for(var p=1;p<zone.points.length;p++)
             {
-                 console.log(p);
+             //    console.log(p);
                 ctx.lineTo(zone.points[p].x, zone.points[p].y);
             }
             
@@ -290,7 +346,7 @@ this.applyTransform(ctx, zone.transformSetting);
        ctx.globalCompositeOperation='source-in';
       zone.source="textures/forest_tile.png";
          //this.drawStaticImage(ctx,zone);)
-         console.log(texture);
+    //     console.log(texture);
         //console.log("TEXTURE: /"+texture+" / "+zone.imgCoords.topLeft.x+" / "+ zone.imgCoords.topLeft.y+" / "+ zone.imgCoords.width+" / "+ zone.imgCoords.height);
         // ctx.fillStyle="transparent";
       //  ctx.drawImage(texture,zone.imgCoords.topLeft.x, zone.imgCoords.topLeft.y, zone.imgCoords.width, zone.imgCoords.height);

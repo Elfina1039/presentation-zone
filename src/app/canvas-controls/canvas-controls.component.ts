@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { ZoneCategory } from '../interfaces/zone-category';
+
 
 @Component({
   selector: 'app-canvas-controls',
@@ -9,6 +11,7 @@ export class CanvasControlsComponent implements OnInit {
 
     @Output() changeZoom = new EventEmitter<number>(); 
      @Input("zoom") zoom : number;
+     @Input("zoneCategories") zoneCategories : number;
     
   constructor() { }
 
