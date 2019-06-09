@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, Input, Output, EventEmitte
 import { DrawingSvc } from '../services/drawing.service';
 import { ImgData } from '../interfaces/img-data';
 import { ZoneCategory } from '../interfaces/zone-category';
+import { Zone } from '../classes/zone';
 
 
 
@@ -30,6 +31,8 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
     bgImage: string;
     zoom:number;
     fitZoom : number;
+    selectedZone : Zone;
+    displayedZones : Zone[] = [];
     
     ctx: any;
     interCtx: any;
@@ -40,6 +43,7 @@ export class CanvasComponent implements OnInit, OnChanges, AfterViewInit {
   constructor (private _drawingSvc : DrawingSvc) { 
    this.zoom=1;
     this.fitZoom = 0.4;
+      
 
   }
     
@@ -55,7 +59,9 @@ ngOnInit() {
                        this.ctx=this.canvas.nativeElement.getContext("2d");
      this.interCtx=this.interaction.nativeElement.getContext("2d");
       this.animCtx=this.animation.nativeElement.getContext("2d");
-        this.processZones();
+         //  let zones = this.zones.filter((z)=>z.category=="Území");
+          this.displayedZones = this.zones;
+      this.processZones(this.displayedZones);
                      }
     
 
@@ -70,17 +76,19 @@ ngOnInit() {
   
      
   if(this.ctx && this.interCtx && this.animCtx){
-      this.processZones();
+   this.displayedZones = this.zones.
+      this.processZones(this.displayedZones);
   }
   }
    
     
-processZones(){
+processZones(zones){
     
-    
+    this.ctx.clearRect(0,0,this.canvas.nativeElement.width,this.canvas.nativeElement.height);
+     this.interCtx.clearRect(0,0,this.interaction.nativeElement.width,this.interaction.nativeElement.height);
     this._drawingSvc.animations=[];
      
-    this.zones.forEach((zone)=>{
+   zones.forEach((zone)=>{
        // console.log("canvas drawing zones: ");
         //console.log(zone);
         
@@ -114,17 +122,19 @@ if(this._drawingSvc.animations.length>0){
  locatePolygon(mouse, ctx, display) {
      if(this.mode=="interaction"){
            var rZone;
-  this.zones.filter((z)=>z.cat!="movement").forEach(function(zone, zid) {
+         let ref = this;
+         //z.cat!="movement" && 
+  this.displayedZones.filter((z)=>(z!=ref.selectedZone && z.category!="Mrak")).forEach(function(zone, zid) {
 
     let points = zone.points;
     ctx.beginPath();
-    ctx.moveTo(parseInt(points[0].x), parseInt(points[0].y));
+    ctx.moveTo(points[0].x, points[0].y);
 
     //console.log(zone.WORD["#text"]+"="+points[0].x+":"+ points[0].y);
 
     for (let p = 1; p < points.length; p++) {
       //  console.log(zone);
-      ctx.lineTo(parseInt(points[p].x), parseInt(points[p].y));
+      ctx.lineTo(points[p].x, points[p].y);
 
       //console.log(points[p].x+":"+ points[p].y);
     }
@@ -147,7 +157,11 @@ if(this._drawingSvc.animations.length>0){
      if(display==true){
       //   console.log(rZone);
         this.clicked.emit(rZone); 
-         this.focusOn(rZone);
+         if(rZone.category=="Území"){
+             this.focusOn(rZone); 
+             this.selectedZone = rZone;
+         }
+        
      } 
      }
 
@@ -191,6 +205,15 @@ zoomChng(zChng) {
 
 
 }
+    
+    
+redrawSelected(e){
+    console.log(e);
+    this.displayedZones = this.zones.filter((z)=>e[z.category]==true);
+    this.processZones(this.displayedZones);
+}    
+    
+    
     scaleCanvas(canvases, inner, outer, zoom, fitZoom){
         
 let dw=parseInt(outer.nativeElement.style.width);   // manuscript element
@@ -227,7 +250,7 @@ let nh : number=parseInt(this.imgData.height)*zoom;
    
     
    // console.log(nw + "--" + nh);
-    inner.nativeElement.style.width=nw;
+ inner.nativeElement.style.width=nw;
   inner.nativeElement.style.height=nh;
        
         
@@ -235,6 +258,10 @@ let nh : number=parseInt(this.imgData.height)*zoom;
     
   focusOn(zone){
     console.log("zooming in");
+         
+   this.displayedZones = this.zones.filter((z)=>z.word!=zone.word);
+      this.processZones(this.displayedZones);
+                      
 
     let xtr=zone.imgCoords;
     
@@ -249,14 +276,14 @@ let nh : number=parseInt(this.imgData.height)*zoom;
     let ox=(vw-sx)/2;
     let oy=(vh-sy)/2;
     
-    let nzm : number = parseFloat(vw/sx);
+    let nzm : number = vw/sx;
       console.log(vw + " : " + sx);
       console.log("new zoom: "+nzm);
     
     this.zoomChng(nzm-this.zoom);
       let ref=this;
     setTimeout(function(){ref.moveScreen({x:xtr.min.x,y:xtr.min.y},ox,oy, nzm)},500);
-                      
+   
                 };
     
 moveScreen(xy, ox, oy, nzm) {

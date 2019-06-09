@@ -13,6 +13,7 @@ export class AudioComponent implements AfterViewInit {
     
     @Input("songUrl") songUrl: string;
     @Input("playing") playing: boolean;
+     @Input("mode") mode: string;
      @Input("commentUrl") commentUrl: string;
     
      @Output() canPlay = new EventEmitter<string>();
@@ -21,6 +22,7 @@ export class AudioComponent implements AfterViewInit {
 
 
   ngAfterViewInit() {
+      console.log("player ready : " + this.mode);
       let ref=this;
     this.music.nativeElement.oncanplay = function() {
     ref.canPlay.emit("ready");
@@ -35,8 +37,8 @@ export class AudioComponent implements AfterViewInit {
   }
     
      ngOnChanges() {
-          console.log("PLAY");
-      if(this.songUrl && this.playing){
+          console.log("PLAY: " + this.mode);
+      if(this.songUrl && (this.playing || this.mode=="interaction")){
           this.music.nativeElement.load();
           this.music.nativeElement.play();
       }

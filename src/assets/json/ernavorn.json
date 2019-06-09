@@ -7,185 +7,490 @@
         "title": "Ernavorn"
     },
     "slides": [
-        {
-            "word": "Královské loďstvo",
-            "color": "#ffffff",
-            "shape": " 391,685  457,685  457,738  391,738 ",
-            "cat": "movement",
-            "fields": {
-                "destination": {
-                    "name": "destination",
-                    "value": "150,520"
-                },
-                "icon": {
-                    "name": "icon",
-                    "value": "icons/ship.png"
-                },
-                "description": {
-                    "name": "description",
-                    "value": "Flotila krále Saldora"
-                },
-                "image": {
-                    "name": "image",
-                    "value": "animations/fatcat.gif"
-                },
-                "music": {
-                    "name": "music",
-                    "value": ""
-                }
-            }
-        },
-        {
-            "word": "Modrá skála",
-            "color": "#00ffff",
-            "shape": " 1256,304  1303,304  1303,261  1256,261 ",
-            "cat": "landscape",
+            {
+            "word": "mrak",
+            "color": "#ff0000",
+            "shape": " 518,932  558,879  633,834  714,801  742,746  775,655  822,651  911,614  970,553  910,517  931,461  928,401  890,326  870,267  889,199  979,167  1024,212  1051,255  1046,314  1066,380  1095,422  1152,426  1208,414  1243,375  1291,273  1288,249  1376,107  1393,6  402,5  8,6  6,612  3,946  7,1125  436,1129  479,1078  519,994 ",
+            "cat": "Mrak",
             "fields": {
                 "title": {
                     "name": "title",
                     "value": ""
                 },
-                "icon": {
-                    "name": "icon",
-                    "value": "icons/cave_tropical.png"
-                },
                 "description": {
                     "name": "description",
-                    "value": "Modrá skála leží na severu. Modrá je proto, že je zasněžená. Žijí v ní eskymáci."
+                    "value": ""
                 },
                 "image": {
                     "name": "image",
-                    "value": "icons/cave_tropical.png"
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": ""
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "cloud"
                 },
                 "music": {
                     "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Nova Krota",
+            "color": "#ff8000",
+            "shape": " 783,395  791,384  813,386  821,381  830,385  842,384  844,398  854,409  842,417  783,414 ",
+            "cat": "Město",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Aritreiské město"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "NK"
+                },
+                "image": {
+                    "name": "image",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_paint.png"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "border_black"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Ronetta",
+            "color": "#ff8000",
+            "shape": " 304,181  317,182  330,181  343,184  360,181  379,183  379,165  368,156  358,148  346,146  335,137  326,148  318,145  304,149  301,161 ",
+            "cat": "Město",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Haladrijské město"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "R"
+                },
+                "image": {
+                    "name": "image",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_paint.png"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "border_black"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Tum",
+            "color": "#ff8000",
+            "shape": " 374,512  371,494  375,485  375,478  383,467  393,472  397,460  412,473  424,474  441,463  461,490  455,505  448,512  414,511  388,511 ",
+            "cat": "Město",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Aritrisjký přístav"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Tum"
+                },
+                "image": {
+                    "name": "image",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_paint.png"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "border_black"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
                     "value": ""
                 }
             }
         },
         {
             "word": "Maraburo",
-            "color": "#0000ff",
-            "shape": " 1130,326  1193,326  1193,370  1130,370 ",
-            "cat": "default",
+            "color": "#ff8000",
+            "shape": " 1116,358  1115,346  1112,337  1120,326  1119,320  1128,302  1135,317  1139,309  1147,317  1155,330  1170,329  1176,313  1190,339  1189,359  1174,361  1144,362 ",
+            "cat": "Město",
             "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Město nájezdníků"
+                },
                 "description": {
                     "name": "description",
-                    "value": "Maledictus haven"
+                    "value": "Maraburo"
                 },
                 "image": {
                     "name": "image",
-                    "value": "icons/castle_old.png"
+                    "value": ""
                 },
                 "icon": {
                     "name": "icon",
-                    "value": "icons/castle_old.png"
+                    "value": "icons/castle_paint.png"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "border_black"
                 },
                 "music": {
                     "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
                     "value": ""
                 }
             }
         },
         {
-            "word": "Erebo",
-            "color": "#0000ff",
-            "shape": "550,390 630,390 630,320, 550,320",
-            "cat": "default",
+            "word": "Údolí krve",
+            "color": "#ffff00",
+            "shape": " 833,574  840,555  855,550  877,552  889,562  903,559  914,577  929,589  923,611  891,619  853,614  831,603 ",
+            "cat": "Území",
             "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Místo bitvy"
+                },
                 "description": {
                     "name": "description",
-                    "value": "Vesnice s krystalovou objímkou"
-                },
-                "image": {
-                    "name": "image",
-                    "value": "animations/dragon_flying.gif"
-                },
-                "icon": {
-                    "name": "icon",
-                    "value": "icons/hut.png"
-                },
-                "music": {
-                    "name": "music",
-                    "value": "04-TimeKeepers-AHambar-FWM010b.mp3"
-                }
-            }
-        },
-        {
-            "word": "Tum",
-            "color": "#0000ff",
-            "shape": "undefined",
-            "cat": "default",
-            "fields": {
-                "description": {
-                    "name": "description",
-                    "value": "Aritre haven"
-                },
-                "image": {
-                    "name": "image",
                     "value": ""
+                },
+                "image": {
+                    "name": "image",
+                    "value": "bitva.jpg"
                 },
                 "icon": {
                     "name": "icon",
                     "value": ""
                 },
-                "music": {
-                    "name": "music",
-                    "value": ""
-                }
-            }
-        },
-        {
-            "word": "Údolí_krve",
-            "color": "#00ff00",
-            "shape": "713,514  738,514  754,511  770,526  790,529  805,532  815,543  831,545  848,551  871,551  882,554  887,564  895,578  881,589  867,586  841,571  833,567  825,557  810,555  799,563  795,551  787,547  779,539  748,530  734,530",
-            "cat": "cat1",
-            "fields": {
-                "description": {
-                    "name": "description",
-                    "value": "Zde proběhla bitva"
-                },
-                "image": {
-                    "name": "image",
-                    "value": "animations/dragon_walking.gif"
-                },
-                "icon": {
-                    "name": "icon",
-                    "value": ""
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "border_black"
                 },
                 "music": {
                     "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
                     "value": ""
                 }
             }
         },
         {
-            "word": "Červená příšera",
-            "color": "#ff0000",
-            "shape": " 1004,521  1102,521  1102,580  1004,580 ",
-            "cat": "stavba",
+            "word": "Rio",
+            "color": "#ff8000",
+            "shape": " 377,323  382,310  395,300  400,297  415,318  415,336  383,337 ",
+            "cat": "Město",
             "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Městečko"
+                },
                 "description": {
                     "name": "description",
-                    "value": "Tenhle obrázek se líbil klukům."
+                    "value": "??"
                 },
                 "image": {
                     "name": "image",
-                    "value": "icons/threeheaded_monster.png"
+                    "value": ""
                 },
                 "icon": {
                     "name": "icon",
-                    "value": "icons/threeheaded_monster.png"
+                    "value": "icons/castle_paint.png"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "border_black"
                 },
                 "music": {
                     "name": "music",
-                    "value": "10-ReignOfVengeance-AHambar-FWM010b.mp3"
+                    "value": ""
                 },
-                "destination": {
-                    "name": "destination",
-                    "value": "700,600"
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Ulan Ova",
+            "color": "#ff8000",
+            "shape": " 721,763  750,761  772,762  756,735  742,727  735,737  720,717  712,715  702,735  687,737  678,752  680,762 ",
+            "cat": "Město",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Město barbarů"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "U"
+                },
+                "image": {
+                    "name": "image",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": "icons/castle_paint.png"
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "border_black"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Haladrie",
+            "color": "#ffff00",
+            "shape": " 413,412  425,407  417,397  406,381  391,376  372,373  341,372  312,375  302,385  271,382  238,382  207,382  176,372  163,353  162,330  175,306  197,295  223,288  242,280  250,263  256,251  259,233  248,233  236,229  231,220  229,207  248,194  261,198  277,200  289,190  299,176  304,159  315,145  327,149  335,136  347,142  363,145  352,131  350,116  364,117  382,122  403,125  427,123  423,113  430,101  451,92  459,73  478,65  496,62  499,77  507,62  521,55  535,58  535,65  551,79  559,79  574,93  584,99  587,110  601,119  607,119  617,133  611,150  609,163  618,173  629,157  632,141  651,161  684,179  708,214  694,236  713,265  734,277  735,307  723,327  699,351  679,369  658,389  622,392  595,395  563,428  543,441  518,444  490,439  451,419  430,421 ",
+            "cat": "Území",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Haladrijské území"
+                },
+                "description": {
+                    "name": "description",
+                    "value": "Haladrijské území"
+                },
+                "image": {
+                    "name": "image",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": ""
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "region_yellow"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Aritreia",
+            "color": "#ffff00",
+            "shape": " 413,415  419,433  417,444  405,461  386,464  388,455  379,456  379,465  363,476  362,493  359,503  367,515  374,523  383,513  396,509  413,508  432,509  445,513  451,521  448,535  435,548  416,561  388,575  379,598  379,626  393,637  417,636  427,643  427,653  412,661  423,673  445,674  463,675  467,667  486,665  505,665  511,678  503,703  510,717  507,733  520,649  545,628  560,611  575,590  592,577  615,565  627,570  636,551  651,538  671,539  691,525  722,519  720,512  722,499  750,494  766,494  785,502  791,486  808,489  817,499  829,489  840,481  858,485  868,477  882,480  885,472  891,458  909,446  919,437  916,417  903,401  890,376  879,370  855,365  832,373  805,365  791,357  774,351  755,334  735,309  717,336  690,361  658,389  595,395  565,426  542,443  514,445  487,438  461,423  446,420  429,422 ",
+            "cat": "Území",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Aritreiské ízemí"
+                },
+                "description": {
+                    "name": "description",
+                    "value": ""
+                },
+                "image": {
+                    "name": "image",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": ""
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "region_blue"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
+                }
+            }
+        },
+        {
+            "word": "Maraburo",
+            "color": "#ffff00",
+            "shape": " 1113,337  1107,321  1116,308  1127,296  1127,287  1089,294  1055,316  1063,371  1094,421  1156,423  1211,411  1242,374  1255,342  1229,337  1221,317  1216,305  1207,312  1195,317  1184,309  1174,305  1169,312  1164,325  1151,321  1139,313  1126,307  1118,321  1127,329 ",
+            "cat": "Území",
+            "fields": {
+                "title": {
+                    "name": "title",
+                    "value": "Maraburské území"
+                },
+                "description": {
+                    "name": "description",
+                    "value": ""
+                },
+                "image": {
+                    "name": "image",
+                    "value": ""
+                },
+                "icon": {
+                    "name": "icon",
+                    "value": ""
+                },
+                "drawingSetting": {
+                    "name": "drawingSetting",
+                    "value": "region_red"
+                },
+                "music": {
+                    "name": "music",
+                    "value": ""
+                },
+                "comment": {
+                    "name": "comment",
+                    "value": ""
+                },
+                "animation": {
+                    "name": "animation",
+                    "value": ""
+                },
+                "path": {
+                    "name": "path",
+                    "value": ""
                 }
             }
         }
+    
     ]
 }

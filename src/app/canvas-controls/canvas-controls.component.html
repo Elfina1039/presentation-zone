@@ -7,8 +7,20 @@
             <button type="button" class="btn btn-secondary" id="zoomOut" (click)="zoomChng(-0.1)">
               -
             </button>
+
+
+    
+    
+     <button type="button" class="btn btn-secondary" id="zoomToFit" (click)="zoomChng(fitZoom-zoom)">
+              fit
+            </button>
+    
           </div>
-    <span *ngFor="let zc of zoneCategories">{{zc.name}} ({{zc.zoneCount}})</span>
+    <span *ngFor="let zc of zoneCategories" class=categorySwitch>
+        <button class="dspButton" (click)="zc.selected=!zc.selected; selectionChng()" [ngClass]="zc.selected ? 'hideButton' : 'showButton'"></button>
+        {{zc.name}} ({{zc.zoneCount}})
+    
+    </span>
 
 </div>  
 

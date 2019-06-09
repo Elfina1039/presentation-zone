@@ -8,7 +8,7 @@ import { Point } from '../interfaces/point';
 })
 
 export class DrawingSvc {
-    drawingSettings={uzemi:{}, highlight:{},  Flora:{} , region_white:{}, region_green:{}, region_blue:{}, region_red:{}, region_purple:{}, region_yellow:{},
+    drawingSettings={uzemi:{}, highlight:{},  Flora:{} , region_white:{}, region_green:{}, region_blue:{}, region_red:{}, region_purple:{}, region_yellow:{},border_black:{},
                      text:{},  image:{}, cloud:{}, blackness:{}};
     animations=[];
     dynamics = [];
@@ -27,6 +27,7 @@ constructor(
           this.drawingSettings.region_red=<DrawingSettings>{ fillStyle:"rgba(255,0,0,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
          this.drawingSettings.region_purple=<DrawingSettings>{ fillStyle:"rgba(255,0,255,0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
          this.drawingSettings.region_yellow=<DrawingSettings>{ fillStyle:"rgba(239, 222, 28, 0.3)", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
+         this.drawingSettings.border_black=<DrawingSettings>{ fillStyle:"transparent", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
     this.drawingSettings.text=<DrawingSettings>{fillStyle:"yellow", strokeStyle:"black", lineWidth:3, shadowColor:"transparent", shadowBlur:0};
     this.drawingSettings.highlight=<DrawingSettings>{ fillStyle:"rgba(255,255,255,0.2)", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
     this.drawingSettings.image=<DrawingSettings>{ fillStyle:"white", strokeStyle:"transparent", lineWidth:5, shadowColor:"white", shadowBlur:10};
@@ -149,10 +150,37 @@ constructor(
             ctx.stroke();
     }
     
+     drawCover(ctx, points){
+      // this.applySetting(ctx,this.drawingSettings[setting]);
+     
+          ctx.fillRect(0,0,5000,5000);
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.moveTo(points[0].x,points[0].y);
+            
+            for(var p=1;p<points.length;p++)
+            {
+                ctx.lineTo(points[p].x, points[p].y);
+            }
+            
+            ctx.closePath();
+            ctx.fill(); 
+            ctx.stroke();
+         
+           
+     
+       
+        ctx.globalCompositeOperation = "destination-over";
+    }
+    
+       
+    
 
     
-    drawImage(ctx, zone, shift){
+    drawImage(ctx, zone){
+        console.log(zone);
         ctx.globalAlpha=1;
+        let shift=[0,0];
 //   zone.img.src = "assets/images/"+zone.source;
     let ix= parseInt(zone.imgCoords.topLeft.x+shift[0]);
     let iy=parseInt(zone.imgCoords.topLeft.y+shift[1]);

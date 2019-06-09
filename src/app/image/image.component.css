@@ -13,32 +13,77 @@
     position:fixed;
     top:0;
     left:0;
-    padding:3%;
+    padding:1em;
     z-index:500;
     background-image:url("https://www.draconica.net/ft2019/wp-content/uploads/sites/21/2019/02/bg3.jpg");
     background-size:cover;
+    overflow-y : scroll;
 }
 
 #image{
    background-color: rgba(100,100,100,0.3);
-
-margin: 1em;
-
+margin: 0.5em;
     margin-bottom: 1em;
-
 margin-bottom: 0;
-
 box-shadow: 0 0 15px rgba(0,0,0,0.7);
-
 max-width: 100%;
-
-border: 10px outset rgb(100,100,100);
+border: 2px outset rgb(100,100,100);
 }
 
 #description{
        background-color: rgba(0,0,0,0.7);
-margin:1em;
-    padding:2em;
+margin:0.5em;
+    padding:1em;
 box-shadow: 0 0 15px rgba(0,0,0,0.7);
    max-width:100%;
+}
+
+#description h2{
+    border-bottom : 1px solid white;
+}
+
+
+
+/* CUSTOM SCROLLBAR */
+
+::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(20,20,20);
+    border: 2px solid #ffffff;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #000000;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(20,20,20);
+    border: 0px none #ffffff;
+    border-radius: 39px;
+}
+
+::-webkit-scrollbar-track:hover {
+    background: rgb(20,20,20);
+}
+
+::-webkit-scrollbar-track:active {
+    background: rgb(20,20,20);
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
 }

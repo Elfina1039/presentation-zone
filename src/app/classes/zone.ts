@@ -93,6 +93,9 @@ export class Zone {
 }
 
 
+
+
+
 export class Icon extends Zone {
     
     position: any;
@@ -118,7 +121,8 @@ export class Icon extends Zone {
     }
     
     draw(ctx){
-        this.drawing.drawStaticImage(ctx, this);
+        this.drawing.drawImage(ctx, this);
+        console.log("drawing "+this.word);
     }
     
     
@@ -155,6 +159,41 @@ export class Region extends Zone {
       //console.log("drawing Region");
          this.drawing.applySetting(ctx, this.drawingSetting);
         this.drawing.drawPolygon(ctx, this.points, this.drawingSetting);
+    }
+    
+        addToAnimations(canvas, zoom){
+     console.log("adding" + this.word);
+       return [this];
+    }
+    
+    animate(ctx, stage, canvas, zoom){
+       // console.log("animating region");
+         ctx.save();
+        this.drawing.applySetting(ctx, this.drawingSetting);
+        ctx.globalAlpha=stage;
+        this.draw(ctx);
+         ctx.restore();
+     
+    }
+    
+        
+   
+}
+
+export class Cover extends Zone {
+
+    constructor(slide){
+        super(slide);
+      //console.log("constructing region");
+    }
+        
+
+    draw(ctx){
+      //console.log("drawing Region");
+         this.drawing.applySetting(ctx, this.drawingSetting);
+     this.drawing.drawCover(ctx, this.points);
+ 
+    
     }
     
         addToAnimations(canvas, zoom){
